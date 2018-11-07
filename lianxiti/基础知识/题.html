@@ -74,7 +74,7 @@
     //   b();
     //   return b;
     // }
-    // var c=1();
+    // var c=a();
     // c();
     // console.log(n);
 
@@ -99,6 +99,18 @@
     // console.log(a);
 
 
+    // console.log(a);
+    // a=12;
+    // function fn(){
+    //   console.log(a);
+    //   var a=13;
+    // }
+    // fn();
+    // console.log(a);
+
+
+
+
 //     var num = 10;
 // 	   var obj = {num: 20};
     // obj.fn = (function (num) { 
@@ -115,6 +127,229 @@
     // obj.fn(10); 
     // console.log(num, obj.num);
 
+
+    
+    // if(!("a" in window)){
+    //   var a = 1;
+    // }
+    // console.log(a);
+
+
+    // function fn(x,y){
+    //   var arg = arguments;
+    //   y = 200;
+    //   console.log(arg[1]);
+    //   arg[1] = 300;
+    //   console.log(y);
+    // }
+    // fn(1);
+
+
+
+    // var foo = 'hello';
+    // (function(foo){
+    //   console.log(foo);
+    //   var foo = foo || 'world';
+    //   console.log(foo);
+    // })(foo);
+    // console.log(foo);
+
+
+
+    // console.log(0 || 1 && 2 || 0 || 3 && 2 || 1);
+
+
+
+    // var a = 9;
+    // function fn(){
+    //   a = 0;
+    //   return function (b){
+    //     return b + a++;
+    //   }
+    // }
+    
+
+
+    // var ary = [1,2,3,4];
+    // function fn(ary){
+    //   ary[0] = 0;
+    //   ary=[0];
+    //   ary[0] = 100;
+    //   return ary;
+    // }
+    // var res = fn(ary);
+    // console.log(ary);
+    // console.log(res);
+    
+
+
+    // function fn (p){
+    //   return function (n){
+    //     console.log(n + (i++));
+    //   }
+    // }
+    // var f = fn(10);
+    // f(20);
+    // fn(20)(40);
+    // fn(30)(50);
+    // fn(30);
+
+
+    // var i = 10;
+    // function fn (){
+    //   return function (n){
+    //     console.log(n + (++i));
+    //   }
+    // }
+    // var f = fn();
+    // f(20);
+    // fn()(20);
+    // fn()(30);
+    // fn(30);
+
+
+
+    // var num = 10;
+    // var obj = {num:20};
+    // obj.fn = (function(num){
+    //   this.num = num*3;
+    //   num ++;
+    //   return function (n){
+    //     this.num += n;
+    //     num++;
+    //     console.log(num);
+    //   }
+    // })(obj.num);
+    // var fn = obj.fn;
+    // fn(5);
+    // obj.fn(10);
+    // console.log(num,obj.num);
+
+
+
+    // var num = 10,
+    //     obj = {num:20};
+    // obj.fn = (function(num){
+    //     num = this.num + 10;
+    //     this.num = num + 10;
+    //     return function (){
+    //       this.num += ++num;
+    //     }
+    // })(num);
+    // var fn = obj.fn;
+    // fn();
+    // obj.fn();
+    // console.log(num,obj.num);
+    
+
+
+    function Fn(){
+      this.x = 100;
+      this.y = 200;
+      this.getX = function (){
+        console.log(this.x);
+      }
+    }
+    Fn.prototype.getX = function (){
+      console.log(this.x);
+    }
+    Fn.prototype.getY = function (){
+      console.log(this.y);
+    }
+    var f1 = new Fn;
+    var f2 = new Fn;
+    console.log(f1.getX === f2.getX);//false
+    console.log(f1.getY === f2.getY);//true
+    console.log(f1.__proto__.getY === Fn.prototype.getY);//true
+    console.log(f1.__proto__.getX === f2.getX);//false
+    console.log(f1.getX === Fn.prototype.getX);//false
+    console.log(f1.constructor);//Fn
+    console.log(Fn.prototype.__proto__.constructor);//Object
+    f1.getX();//100
+    f1.__proto__.getX();//undefined
+    f2.getY();//200
+    Fn.prototype.getY();//undefined
+    
+    
+
+
+    // var fullName = 'language';
+    // var obj = {
+    //   fullName : 'javascript',
+    //   prop : {
+    //     getFullName : function(){
+    //       return this.fullName;
+    //     }
+    //   }
+    // };
+    // console.log(obj.prop.getFullName());
+    // var test = obj.prop.getFullName;
+    // console.log(test());
+    
+    
+    
+    // var name = 'window';
+    // var Tom = {
+    //   name : 'Tom',
+    //   show : function(){
+    //     console.log(this.name);
+    //   },
+    //   wait : function (){
+    //     var fun = this.show;
+    //     fun();
+    //   }
+    // }
+    // Tom.wait();
+
+
+    // function fun(){
+    //   this.a = 0;
+    //   this.b = function(){
+    //     alert(this.a);
+    //   }
+    // }
+    // fun.prototype = {
+    //   b: function (){
+    //     this.a = 20;
+    //     alert(this.a);
+    //   },
+    //   c: function (){
+    //     this.a = 30;
+    //     alert(this.a);
+    //   }
+    // }
+    // var my_fun = new fun();
+    // my_fun.b();
+    // my_fun.c();
+
+
+
+    // function Fn(){
+    //   var n = 10;
+    //   this.m = 20;
+    //   this.aa = function(){
+    //     console.log(this.m);
+    //   }
+    // }
+    // Fn.prototype.bb = function(){
+    //   console.log(this.n);
+    // }
+    // var f1 = new Fn;
+    // Fn.prototype = {
+    //   aa: function  (){
+    //     console.log(this.m+10);
+    //   }
+    // }
+    // var f2 = new Fn;
+    // console.log(f1.consreuctor);
+    // console.log(f2.consreuctor);
+    // f1.bb();
+    // f1.aa();
+    // f2.bb();
+    // f2.aa();
+    // f2.__proto__.aa();
+    
+    
 
     
   </script>
