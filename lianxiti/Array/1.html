@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组去重</title>
+    <link rel="" href="css.css"/>
+</head>
+
+<body>
+  <div class="a"></div>
+    <script>
+        var arr = [1, 2, 3, 4, 1, 2, 3, 5, 6, 7, 8, 4, 5, 6, 7, 6];
+        // function quchong(arr) {
+        //     for (var i = 0; i < arr.length - 1; i++) {
+        //         var item = arr[i];
+        //         for (var j = i + 1; j < arr.length; j++) {
+        //             if (item === arr[j]) {
+        //                 arr.splice(j, 1);
+        //                 j--;
+        //             }
+        //         }
+        //     }
+        // }
+        
+
+        function quchong(arr) {
+            var obj = {};
+            for (var i = 0; i < arr.length ; i++) {
+                var item = arr[i];
+                if (typeof obj[item] !== 'undefined') {
+                    arr[i] = arr[arr.length - 1];
+                    arr.length--;
+                    i--;
+                    continue;
+                }
+                obj[item] = item;
+            }
+        }
+        quchong(arr);
+        console.log(arr.sort((a,b)=>a-b));
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    var arr = [1, 3, 4, 5, 2, 7];
+    function maopao(arr) {
+      for (var i = 0; i < arr.length - 1; i++) {
+        for (var j = 0; j < arr.length - 1 - i; j++) {
+          if (arr[j] > arr[j + 1]) {
+            arr[j] = arr[j] + arr[j + 1];
+            arr[j + 1] = arr[j] - arr[j + 1];
+            arr[j] = arr[j] - arr[j + 1];
+          }
+        }
+      }
+      return arr;
+    }
+
+    function maopao2(arr) {
+      for (var i = 0; i < arr.length - 1; i++) {
+        for (var j = 0; j < arr.length - 1 - i; j++) {
+          if (arr[j] > arr[j + 1]) {
+            var tmp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = tmp;
+          }
+        }
+      }
+      return arr;
+    }
+
+    function maopao3 (arr){
+
+    }
+    console.log(maopao2(arr));
+  </script>
+</body>
+
+</html>

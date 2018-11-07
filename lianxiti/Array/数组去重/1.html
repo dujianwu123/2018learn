@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    var arr = [1, 2, 3, 4, 1, 2, 3, 4, 5, 3, 4, 5, 6, 7, 6, 5, 4, 3, 5, 8, 7, 9, 7, 9];
+
+    function quchong(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        var cur = arr[i];
+        var newArr = arr.slice(i + 1);
+        if (newArr.indexOf(cur) > -1) {
+          arr.splice(i, 1);
+          i--;
+        }
+      }
+      return arr;
+    }
+    console.log("xxx",quchong(arr).sort((a, b) => { return a - b; }));
+
+    arr = [1, 2, 3, 4, 1, 2, 3, 4, 5, 3, 4, 5, 6, 7, 6, 5, 4, 3, 5, 8, 7, 9, 7, 9];
+
+    function quchong2(arr) {
+      var obj = {};
+      for (var i = 0; i < arr.length; i++) {
+        var cur = arr[i];
+        if (typeof obj[cur] !== 'undefined') {
+          arr.splice(i, 1);
+          i--;
+        } else {
+          obj[cur] = cur;
+        }
+      }
+      obj=null;
+      return arr;
+    }
+
+    console.log(quchong2(arr));
+  </script>
+</body>
+
+</html>
