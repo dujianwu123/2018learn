@@ -56,8 +56,17 @@ let utils =(function(){
     return {l:l,t:t}
   };
 
+  let winHandle = function winHandle (attr,value){
+    if( typeof value !== 'undefined'){
+      document.documentElement[attr] = value;
+      document.body[attr] = value;
+      return ;
+    }
+    return document.documentElement[attr]||document.body[attr];
+  }
   return {
     css,
-    offset
+    offset,
+    winHandle
   };
 })();
