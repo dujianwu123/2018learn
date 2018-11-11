@@ -52,18 +52,39 @@
 //   console.log(n);
 
 
-let i = 2;
-let fn = function (n){
-  i *= 2;
-  return function (m){
-    i -= (n--) + (++m); //先算右侧的，拿右侧结果和左侧算
-    console.log(i);
-  }
-};
-let f = fn(1);
-f(2);
-fn(3)(4);
-f(5);
-console.log(i);
+// let i = 2;
+// let fn = function (n){
+//   i *= 2;
+//   return function (m){
+//     i -= (n--) + (++m); //先算右侧的，拿右侧结果和左侧算
+//     console.log(i);
+//   }
+// };
+// let f = fn(1);
+// f(2);
+// fn(3)(4);
+// f(5);
+// console.log(i);
+
+
+
+//valueOf,对象在转换基本类型时，首先会调用 valueOf 然后调用 toString。并且这两个方法你是可以重写的。
+// let a = {
+//   valueOf() {
+//     return 0
+//   },
+//   toString() {
+//   return '1';
+//   },
+//   [Symbol.toPrimitive]() {
+//     // Symbol.toPrimitive ，该方法在转基本类型时调用优先级最高。
+//     return 2;
+//   }
+// }
+// console.log(1 + a);
+
+
+// 'a' + + 'b' // -> "aNaN"
+// // 因为 + 'b' -> NaN
 
 
