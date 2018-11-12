@@ -37,6 +37,7 @@ console.log(obj);//{ age: 2, obj: 333 }
 let { name: K, age: L } = { name: 1, age: 2 }
 console.log(K, L);
 
+//练习题，取 101，102，103
 let data = [{
   "name": "xxx",
   "age": 18,
@@ -48,3 +49,6 @@ let data = [{
 }];
 let [{ score: { english: [A] , math: [, B], chinese: [, , C] }}] = data;
 console.log(A,B,C);
+
+
+
