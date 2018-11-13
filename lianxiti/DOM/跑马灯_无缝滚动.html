@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1"/>
+  <title>DJW</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    ul,li{
+      list-style: none;
+    }
+    .clearfix:after{
+      display: block;
+      content: '';
+      clear: both;
+    }
+    .clearfix{
+      zoom: 1;
+    }
+    .margueeBox {
+      width: 500px;
+      height: 100px;
+      margin: 100px auto;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid red;
+    }
+    .wrapper{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 900px;
+      height: 100px;
+    }
+    .wrapper li{
+      float: left;
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+    }
+    .wrapper li:nth-of-type(3n+1){
+      background-color: red;
+    }
+    .wrapper li:nth-of-type(3n+2){
+      background-color: yellow;
+    }
+    .wrapper li:nth-of-type(3n+3){
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="margueeBox">
+    <ul class="wrapper clearfix">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+    </ul>
+  </div>
+  <script src="utils.js"></script>
+  <script type="text/javascript">
+
+    let oWarpper = document.querySelector('.wrapper');
+    oWarpper.innerHTML += oWarpper.innerHTML;
+    utils.css(oWarpper,{'width':utils.css(oWarpper,'width')*2});
+
+    setInterval(()=>{
+      let cur_left = utils.css(oWarpper,'left');
+      cur_left -= 2;
+      utils.css(oWarpper,{'left':cur_left});
+
+      if(Math.abs(oWarpper.offsetLeft) >= utils.css(oWarpper,'width')/2){
+        utils.css(oWarpper,'left',0);
+      }
+    },13);
+    
+  </script>
+</body>
+</html>

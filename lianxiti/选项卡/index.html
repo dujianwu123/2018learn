@@ -12,19 +12,73 @@
     ul,li{
       list-style: none;
     }
+    .box{
+      width: 500px;
+      height: 300px;
+      margin: 100px auto;
+    }
     
+    .box div{
+      text-align: center;
+      line-height: 300px;
+      font-size: 30px;
+      color: red;
+      font-weight: bold;
+      border: 1px solid blue;
+      width: 498px;
+      height: 298px;
+      display: none;
+    }
+    .box div.show_box{
+      display: block;
+    }
   </style>
 </head>
 <body>
-  <div id="box">
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-    <div></div>
-    <div></div>
-    <div></div>
+  <div class="box" id="box">
+    <button>1_btn</button>
+    <button>2_btn</button>
+    <button>3_btn</button>
+    <div class="show_box">1</div>
+    <div class="">2</div>
+    <div class="">3</div>
   </div>
+  <script>
+    // let oBox = document.querySelector('.box');
+    // let oBtn = document.querySelectorAll('button');
+    // let oDiv = oBox.querySelectorAll('div');
+
+    // [].slice.call(oBtn).forEach((item,index) => {
+    //   item.onclick=(function(index){
+    //     return function(){
+    //       [].slice.call(oDiv).forEach((item)=>{item.className="";});
+    //       oDiv[index].className='show_box';
+    //     }
+    //   })(index);
+    // });
+
+    function Tab (id){
+      this.oBox = document.getElementById(id);
+      this.oBtn = this.oBox.querySelectorAll('button');
+      this.oDiv = this.oBox.querySelectorAll('div');
+    }
+    Tab.prototype = {
+      constructor : Tab,
+      init(){
+        for(let i=0;i<this.oBtn.length;i++){
+          this.oBtn[i].onclick = ()=>{
+            this.change(i);
+          };
+        }
+      },
+      change(index){
+        [].slice.call(this.oDiv).forEach((item)=>{item.className="";});
+        this.oDiv[index].className='show_box';
+      }
+    }
+
+    let tab = new Tab('box');
+    tab.init();
+  </script>
 </body>
 </html>

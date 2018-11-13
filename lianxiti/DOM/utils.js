@@ -23,6 +23,20 @@ let utils =(function(){
     obj.style[attr] = value;
   };
 
+  let setCss2 = function setCss2 (obj,attr,value){
+    if(attr === 'opacity'){
+      obj.style[attr] = value;
+      obj.style[attr] = `filter:alpha(opacity=${value*100})`;
+      return;
+    }
+
+    if(!isNaN(value)){
+      let reg = /^(width|height|fontSize|((margin|padding)?(left|top|right|bottom)?))$/i;
+      reg.test(attr) ? value += 'px' : null
+    }
+    obj.style[attr] = value;
+  }
+
   let setGroupCss = function setGroupCss (obj,options = {}){
     for (let attr in options){
       if(!options.hasOwnProperty(attr)) break;//for in有顺序，数字在先，私有在先，公有在后，所以当便利到公有的第一个时说明私有的已经遍历完了，所以可以是 break
@@ -44,14 +58,14 @@ let utils =(function(){
     let l = obj.offsetLeft;
     let t = obj.offsetTop;
     let p = obj.offsetParent;
-    while (p.tagName !== 'BODY'){
-      l += obj.clientLeft;
-      l += obj.offsetLeft;
+    while (p){
+      l += p.clientLeft;
+      l += p.offsetLeft;
 
-      t += obj.clientTop;
-      t += obj.offsetTop;
+      t += p.clientTop;
+      t += p.offsetTop;
 
-      p = obj.offsetParent;
+      p = p.offsetParent;
     }
     return {l:l,t:t}
   };
