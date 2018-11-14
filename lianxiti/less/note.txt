@@ -1,0 +1,54 @@
+less 的编译
+- 在开发环境下编译（产品没有开发完，正在开发中，这个是开发环境）
+导入less.js 即可
+<link rel="stylesheet/less" type="text/css" href="styles.less" />
+<script src="less.js" type="text/javascript"></script>
+
+- 在生产环境下编译（产品开发完成了，需要部署到服务器上）
+安装全局，npm install less -g
+lessc demo1.less demo1.min.css -x  压缩
+lessc demo1.less demo1.css 不压缩
+lessc ./less/demo1.less ./css/css.css
+
+
+
+
+
+
+
+////
+.centerPos(@w:100,@h:100){  形参 加@ ，： 是设置默认值
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: unit(-(@h/2),px);
+  margin-left: unit(-(@w/2),px);
+  unit()是单位函数
+}
+
+变量
+@link-color: #555;
+字符串拼接变量这么用"@{bg-img}/1.png"
+
+.pub {
+  .bg{ // .pub .bg
+
+  }
+  & > .bg { // .pub > .bg
+
+  }
+  &.bg{ //.pub.bg
+
+  }
+  &:hover{ //.pub:hover
+
+  }
+}
+
+.transition(@property:all,@duration:.5s,@timing-function:linear,@delay:0s){
+  -webkit-transtion: @arguments;// 按形参顺序传值
+  transition: @arguments
+}
+
+@import (reference) "base";
+reference 只把内容导入过来使用，但是不会编译base中的内容

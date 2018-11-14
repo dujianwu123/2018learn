@@ -1,0 +1,13 @@
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+  width: 200px;
+  height: 200px;
+  background: lightblue url("../img/1.png") no-repeat center;
+}
+.box a {
+  color: #555;
+}
