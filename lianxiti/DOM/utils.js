@@ -77,7 +77,16 @@ let utils =(function(){
       return ;
     }
     return document.documentElement[attr]||document.body[attr];
-  }
+  };
+
+  let myJsonParse = function myJsonParse (jsonStr){
+    if(window.JSON){
+      return JSON.parse(jsonStr);
+    }else{
+      return eval('('+jsonStr+')');
+    }
+  };
+
   return {
     css,
     offset,

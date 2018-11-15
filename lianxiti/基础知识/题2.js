@@ -88,3 +88,21 @@
 // // 因为 + 'b' -> NaN
 
 
+
+let n = 1;
+let x = {
+  n: 2,
+  y: (function(n){
+    n = n || 3;
+    return function (m){
+      m = m || 4;
+      this.n += m++; 
+      n += ++m;
+      console.log(n);
+    }
+  })(window.n)
+};
+let z = x.y;
+x.y(5);
+z(6);
+console.log(n,x.n);
