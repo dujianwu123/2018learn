@@ -5,12 +5,36 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1"/>
   <title>DJW</title>
+  <style>
+    #outer{
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      width: 200px;
+      height: 200px;
+      background: red;
+      cursor: pointer;
+    }
+    #inner{
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      width: 100px;
+      height: 100px;
+      background: green;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
   <input type="text" />
+  <div id="outer">
+    <div id="inner"></div>
+  </div>
   <!-- <script type="text/javascript" src="./1.js">
   </script> -->
-  <script src="./事件的默认行为.js"></script>
+  <!-- <script src="./事件的默认行为.js"></script> -->
+  <script src="./事件的传播机制.js"></script>
 </body>
 </html>
