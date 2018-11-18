@@ -1,15 +1,14 @@
 {
-  "name": "lianxiti",
+  "name": "jquery",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "1.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-preset-env": "^1.7.0",
-    "yarn": "^1.12.3"
+    "jquery": "1.11.3"
   }
 }
