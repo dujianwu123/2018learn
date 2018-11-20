@@ -227,5 +227,30 @@
 // test();
 
 
+// var n = 2;
+// function a(){
+//   var n = 3;
+//   function b(m){
+//     console.log(++n + m);
+//   }
+//   b(4);
+//   return b;
+// }
+// var c = a(5);
+// c(6);
+// console.log(n);
+
+
+ /**
+  * 谈一下对作用域链和原型链的理解
+  * 
+  * 
+  */
+
+
+
+
+
+
 
 
