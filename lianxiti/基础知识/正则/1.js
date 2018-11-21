@@ -1,0 +1,14 @@
+/*
+        计算下列字符串中的字节大小，假设英文为1个字节，中文为2个字节
+        [\u4e00-\u9fa5] 中文的区间范围
+    */    
+   let str = 'hello!今天天气不错!';//19
+   let num = 0;
+   for(let i=0;i<str.length;i++){
+       if(/[\u4e00-\u9fa5]/.test(str[i])){
+           num += 2;
+       }else{
+           num ++;
+       }
+   }
+   console.log(num);

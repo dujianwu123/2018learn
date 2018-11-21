@@ -1,0 +1,8 @@
+能用C3解决的动画绝对不用JS，因为C3动画性能好
+
+JS动画
++ 定时器
++ requestAnimationFrame(JS中的帧动画)
++ 所谓的canvas动画就是JS基于定时器完成的（canvas是一个HTML标签，可以理解为是一个画布，可以基于JS在画布上绘制出图像和效果）
+
+FLASH动画(ActionScript)

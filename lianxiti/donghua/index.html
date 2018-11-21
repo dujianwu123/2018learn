@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/reset.min.css" />
+  <style>
+      #box{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background: #E01D20;
+        /* transition: all 1s linear; */
+      }
+      /* #box:active{
+        transform: translateX(500px);
+      } */
+  </style>
+</head>
+<body>
+  <div class="box" id="box"></div>
+  <!-- <script src="./js/move1.js"></script> -->
+  <!-- <script src="./js/move2.js"></script> -->
+  <script src="./js/move3.js"></script>
+  <script>
+    djw_animation(box,{
+  'left':500,
+  'top': 500,
+  'width': 50,
+  'height':50
+});
+  </script>
+</body>
+</html>
