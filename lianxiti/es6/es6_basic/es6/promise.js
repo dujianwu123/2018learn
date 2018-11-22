@@ -67,7 +67,7 @@ new Promise((resolve,reject)=>{
     xhr.open('get','./js/data.js',true);
     xhr.onreadystatechange = () => {
       if(xhr.readyState === 4 && xhr.status === 200){
-        let val = shr.responseText;
+        let val = xhr.responseText;
         resolve(val);
       }
       if(xhr.status != 200){
