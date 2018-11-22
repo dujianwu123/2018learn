@@ -61,12 +61,11 @@
     let change = {};
     let time = 0;
     for(let attr in target){
-        if(target.hasOwnProperty(attr)) break;
-        begin[attr] = utils.css(obj,attr);
-        change[attr] = target[attr] - begin[attr];
+        if(target.hasOwnProperty(attr)) {
+          begin[attr] = utils.css(obj,attr);
+          change[attr] = target[attr] - begin[attr];
+        };
     }
-    console.log(begin);
-    return;
     obj.timer = setInterval(() => {
       time += 17;
       if(time>=duration){
