@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css.css">
+</head>
+
+<body>
+  <div></div>
+  <script>
+    let oDiv = document.querySelector('div');
+    document.onmousedown = function (ev) {
+      oDiv.style.display = 'block';
+      let disX = ev.pageX;
+      let disY = ev.pageY;
+      oDiv.style.left = disX + 'px';
+      oDiv.style.top = disY + 'px';
+      document.onmousemove = function (ev) {
+
+        let l = Math.min(ev.pageX, disX);
+        let t = Math.min(ev.pageY, disY);
+        oDiv.style.width = Math.abs(ev.pageX - disX) + 'px';
+        oDiv.style.height = Math.abs(ev.pageY - disY) + 'px';
+        oDiv.style.left = l + 'px';
+        oDiv.style.top = t + 'px';
+      }
+      document.onmouseup = function () {
+        oDiv.style.display = 'none';
+        oDiv.style.width = oDiv.style.height = 0;
+        document.onmousemove = document.onmouseup = null;
+      }
+    }
+  </script>
+</body>
+
+</html>

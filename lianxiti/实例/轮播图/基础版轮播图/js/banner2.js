@@ -133,7 +133,7 @@ let bannerRender = (function () {
       isOk = false;
       stepIndex--;
       if (stepIndex < 0) {
-        utils.css(wrapper, { 'left': -(slideList.length - 1) * 1000 });
+        utils.css(wrapper, { 'left': -(slideList.length - 1) * 1000 });//马上到克隆的位置
         stepIndex = slideList.length - 2;
       }
       djw_animation(wrapper, { 'left': -stepIndex * 1000 }, 200,()=>{
