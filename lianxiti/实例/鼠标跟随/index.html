@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./reset.min.css">
+  <style>
+    .container {
+      margin: 20px auto;
+      width: 462px;
+      height: 77px;
+      position: relative;
+    }
+
+    .container .imgBox li {
+      float: left;
+      width: 100px;
+      height: 75px;
+      margin-right: 18px;
+      border: 1px solid #DDD;
+    }
+
+    .container .imgBox li:nth-last-child(1) {
+      margin-right: 0;
+    }
+
+    .container .imgBox li img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .container .mark {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 400px;
+      height: 300px;
+      border: 1px solid #000;
+      box-sizing: border-box;
+    }
+
+    .container .mark img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="container">
+    <!-- ul.imgBox>li*4>img[src='./img/apple_$.jpg'] -->
+    <ul class="imgBox clearfix">
+      <li><img src="./img/apple_1.jpg" data-big="./img/apple_1_bigger.jpg" alt=""></li>
+      <li><img src="./img/apple_2.jpg" data-big="./img/apple_2_bigger.jpg" alt=""></li>
+      <li><img src="./img/apple_3.jpg" data-big="./img/apple_3_bigger.jpg" alt=""></li>
+      <li><img src="./img/apple_4.jpg" data-big="./img/apple_4_bigger.jpg" alt=""></li>
+    </ul>
+    <!-- mark动态创建 -->
+    <!-- <div class="mark">
+      <img src="./img/apple_1_bigger.jpg" alt="">
+    </div> -->
+  </section>
+  <script src="./jquery-1.11.3.min.js"></script>
+  <script>
+    $(function ($) {
+      let $container = $('.container');
+      let $imgList = $('.container>.imgBox>li');
+      let $mark = null;
+      $imgList.on('mouseover', function (ev) {
+        //创建mark，根据经过li中的小图片动态管控mark中的图片
+        let src = $(this).children('img').attr('src');
+        src = src.replace(/\_(\d+)/g, '_$1_bigger');
+        if (!$mark) {
+          $mark = $(`<div class="mark">
+                  <img src="${src}" alt="">
+                  </div>`);
+          $container.append($mark);
+        }
+
+      }).on('mouseout', function (ev) {
+        if ($mark) {
+          $mark.remove();
+          $mark = null;
+        }
+
+      }).on('mousemove', function (ev) {
+        let { top: curTop, left: curLeft } = $container.offset();
+        let left = ev.pageX - curLeft + 20;
+        let top = ev.pageY - curTop + 20;
+
+        $mark.css({
+          top:top,
+          left:left
+        });
+      });
+
+    });
+  </script>
+</body>
+
+</html>
