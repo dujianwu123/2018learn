@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;padding: 0;
+    }
+    body{
+      height: 3000px;
+      overflow: hidden;
+    }
+    ul,li{
+      list-style: none;
+    }
+    .clearfix{
+      zoom: 1;
+    }
+    .clearfix:after{
+      display: block;
+      content: '';
+      clear: both;
+    }
+    .menuBox{
+      margin: 20px auto;
+      width: 700px;
+      height: 270px;
+    }
+    .navBox{
+      float: left;
+      width: 200px;
+      background: lightblue;
+    }
+    .navBox ul li{
+      height: 30px;
+      line-height: 30px;
+    }
+    .navBox ul li a{
+      display: block;
+      font-size: 14px;
+      height: 100%;
+      color: #555;
+      padding: 0 10px;
+    }
+    .navBox ul li a.active{
+      background: lightcoral;
+    }
+
+    .detailBox{
+      float: left;
+      width: 500px;
+      height: 100%;
+      background: #eee;
+      font-size: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <section class="menuBox">
+    <nav class="navBox">
+      <ul>
+        <li><a href="#" target="_blank">导航1</a></li>
+        <li><a href="#" target="_blank">导航2</a></li>
+        <li><a href="#" target="_blank">导航3</a></li>
+        <li><a href="#" target="_blank">导航4</a></li>
+        <li><a href="#" target="_blank">导航5</a></li>
+        <li><a href="#" target="_blank">导航6</a></li>
+        <li><a href="#" target="_blank">导航7</a></li>
+        <li><a href="#" target="_blank">导航8</a></li>
+        <li><a href="#" target="_blank">导航9</a></li>
+      </ul>
+    </nav>
+    <div class="detailBox">
+     
+    </div>
+  </section>
+
+  <script src="./jquery-1.11.3.min.js"></script>
+  <script>
+     //基于事件委托给最外层的盒子menuBox 绑定 mouserover方法，这样不管操作后代元素中的谁的mouseover
+     //这个方法都会执行
+     $(function($){
+
+      let $detailBox = $('.detailBox');
+      $(document.body).on('mouseover',function(ev){
+        
+          ev = ev || window.event;
+          let target = ev.target || ev.srcElement;
+          let tagName = target.tagName;
+          let $oParentList = $(target).parents();//获取祖先集合
+          //true 代表祖先中包含.navBox false 代表不包含
+          let flag = $oParentList.filter('.navBox').length > 0 ? true : false;
+          if((tagName === 'A' || tagName === 'Li') && flag){
+            let val = $(target).text().match(/\d+/);
+            $('.navBox>ul>li>a').removeClass('active');
+            $(target).addClass('active');
+            $detailBox.css('display','block').html(`导航${val}的详情内容`);
+            return ;
+          }
+          //如果事件源是detailBox 或者是它的后代元素，不做处理
+          // if($(target).hasClass('detailBox') || $oParentList.filter('detailBox').length>0){
+          //   return;
+          // }
+
+          $detailBox.css('display','none');
+          $('.navBox>ul>li>a').removeClass('active');
+          console.log(222);
+
+      });
+
+      $detailBox.on('mouseover',function(ev){
+        ev.stopPropagation();
+      });
+     });
+  </script>
+</body>
+</html>
