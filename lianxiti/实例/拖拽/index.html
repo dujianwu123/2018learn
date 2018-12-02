@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./reset.min.css">
+  <style>
+    html,
+    body {
+      height: 500%;
+      -webkit-user-select: none;
+      /* 禁止用户选中文字 */
+    }
+
+    .diaLogMark {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    .disLogBox {
+      width: 200px;
+      height: 300px;
+      position: fixed;
+      background: #fff;
+      z-index: 1001;
+      /* 控制盒子在中间我们最好在JS中实现，经过精密的计算，算出具体的TOP和LEFT，而不是模糊的百分比，
+      这样以后我们在JS中通过修改它的TOP和LOFT就可以改变位置 */
+      overflow: hidden;
+    }
+
+    .disLogBox h3.title {
+      padding: 0 10px;
+      height: 35px;
+      line-height: 35px;
+      background: #DDD;
+      border-bottom: 1px solid #AAA;
+      cursor: move;
+      position: relative;
+    }
+
+    .disLogBox h3 i {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      margin-top: -10px;
+      width: 20px;
+      height: 20px;
+      background: #E01D20;
+      cursor: pointer;
+    }
+
+    .active {
+      background: red !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="diaLogMark"></div>
+  <div class="disLogBox">
+    <h3 class="title">
+      DIALOG
+      <i></i>
+    </h3>
+    <div class="con">
+
+    </div>
+  </div>
+  <script src="./jquery-1.11.3.min.js"></script>
+  <!-- <script src="./drag-plugin.js"></script> -->
+  <!-- <script src="./drag-plugin2.js"></script> -->
+  <script src="./drag-plugin3.js"></script>
+  <script>
+    let drag=new Drag($('.disLogBox').get(0), {
+      selector: 'h3'
+    });
+
+    //后期想干什么，直接往计划表中增加方法即可
+    drag.dragstartPlan.add((_this,ev)=>{
+        //_this 执行计划表传递给每一个方法的实例
+        $(_this.dragTarget).addClass('active');
+    });
+    drag.dragendPlan.add((_this,ev)=>{
+        $(_this.dragTarget).removeClass('active');
+    });
+    
+
+
+    // new Drag($('.disLogBox').get(0), {
+    //   selector: 'h3',//=>selector 当前需要操作的目标元素选择器（按住它实现让ele移动，不传就是默认按住ele移动）
+    //   dragstart: function () {
+    //     $(this.dragTarget).addClass('active');
+    //   },
+    //   draging: function () {
+
+    //   },
+    //   dragend: function () {
+    //     $(this.dragTarget).removeClass('active');
+    //   }
+    // });
+
+
+
+    // new Drag($('.disLogBox').get(0), {
+    //   selector: 'h3'//=>selector 当前需要操作的目标元素选择器（按住它实现让ele移动，不传就是默认按住ele移动）
+    // });
+  // new Drag($('.disLogBox').get(0));
+  </script>
+  <!-- <script>
+    $(function ($) {
+
+      let $diaLogMark = $('.diaLogMark');
+      let $diaLogBox = $('.disLogBox');
+      let $boxTitle = $('.title');
+      let $closeBtn = $boxTitle.find('i');
+
+      //1、先让diaLogBox在屏幕中间
+      let winW = document.documentElement.clientWidth;
+      let winH = document.documentElement.clientHeight;
+      let boxW = $diaLogBox.get(0).offsetWidth;
+      let boxH = $diaLogBox.get(0).offsetHeight;
+      $diaLogBox.css({
+        'left': (winW - boxW) / 2,
+        'top': (winH - boxH) / 2
+      });
+
+      //2、关闭按钮
+      $closeBtn.on('click', function () {
+        $diaLogBox.stop().fadeOut(200, () => {
+          $diaLogMark.css('display', 'none');
+        });
+      });
+
+      //3、实现拖拽效果
+      let dragStart = function dragStart(ev) {
+        //this->H3
+        this.disX = ev.clientX - parseFloat($diaLogBox.css('left'));
+        this.disY = ev.clientY - parseFloat($diaLogBox.css('top'));
+
+        this.DRAG_MOVE = dragMove.bind(this);
+        this.DRAG_UP = dragEnd.bind(this);
+        $(document).on('mousemove', this.DRAG_MOVE);
+        $(document).on('mouseup', this.DRAG_UP);
+        // console.log(dragMove.bind(this) === dragMove);//false
+        /*
+          执行bind把方法中的this预先进行改变处理，得到的结果和原有的函数是不一样的，也就是此时我们给
+          DOCUMENT绑定的方法就不在是dragMove了
+        */
+      };
+      let dragMove = function dragMove(ev) {
+        //this->H3
+        let { disX ,disY} = this;
+        let curL = ev.clientX - disX,
+            curT = ev.clientY - disY;
+
+        //边界判断
+        let minL = 0;
+        let minT = 0;
+        let maxL = winW - boxW;
+        let maxT = winH - boxH;
+
+        curL = curL < minL ? minL : (curL > maxL ? maxL : curL);
+        curT = curT < minT ? minT : (curT > maxT ? maxT : curT);
+
+        $diaLogBox.css({
+          left: curL,
+          top: curT
+        });
+      };
+
+      let dragEnd = function dragEnd() {
+        //this->H3
+        $(document).off('mousemove', this.DRAG_MOVE);//=>手指在H3中抬起，证明结束拖拽，我们把给MOVE绑定的方法移除，这样让鼠标再运动的时候，盒子也不会处理
+        $(document).off('mouseup', this.DRAG_UP);
+      };
+      $boxTitle.on('mousedown',dragStart);
+      
+    });
+
+
+
+    /*
+    *拖拽的一个问题，当鼠标移动过快，盒子需要计算最新的位置，但是计算速度跟不上鼠标的移动速度，
+    导致鼠标离开了盒子（具体来说离开了H3），而我们的所有方法都是绑定给H3的相关事件行为的，鼠标不再H3上了，不管做什么
+    操作都不会和之前绑定的方法有关
+    （鼠标不再H3上）
+    1.鼠标继续移动，盒子也不动了，因为并没有触发H3的mousemove
+    2.鼠标在H3以外松开，没有触发它的mouseup，也就是没有执行取消mousemove绑定方法的操作，
+    此时H3的mousemove还绑定着呢，这样即便鼠标松开，我们鼠标重回到H3上，也会触发
+    它的move，让盒子跟着走
+
+    解决问题：
+    1.用一根绳子把H3和鼠标拴在一起，这样鼠标就不会离开H3了
+      this.setCaptrue();把当前元素THIS和鼠标绑在一起
+      this.releaseCaptrue();解绑
+      【此方法不兼容谷歌浏览器】
+
+    2.鼠标再快也不会逃离document，此时可以把给document的mousemove绑定方法，还有mouseup
+    */
+  </script> -->
+</body>
+
+</html>

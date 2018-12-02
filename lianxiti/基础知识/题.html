@@ -121,8 +121,8 @@
 
 
 
-//     var num = 10;
-// 	   var obj = {num: 20};
+    //     var num = 10;
+    // 	   var obj = {num: 20};
     // obj.fn = (function (num) { 
     //   this.num = num * 3;
     //   num++;
@@ -138,7 +138,7 @@
     // console.log(num, obj.num);
 
 
-    
+
     // if(!("a" in window)){
     //   var a = 1;
     // }
@@ -177,7 +177,7 @@
     //     return b + a++;
     //   }
     // }
-    
+
 
 
     // var ary = [1,2,3,4];
@@ -190,7 +190,7 @@
     // var res = fn(ary);
     // console.log(ary);
     // console.log(res);
-    
+
 
 
     // function fn (p){
@@ -250,20 +250,20 @@
     // fn();
     // obj.fn();
     // console.log(num,obj.num);
-    
 
 
-    function Fn(){
+
+    function Fn() {
       this.x = 100;
       this.y = 200;
-      this.getX = function (){
+      this.getX = function () {
         console.log(this.x);
       }
     }
-    Fn.prototype.getX = function (){
+    Fn.prototype.getX = function () {
       console.log(this.x);
     }
-    Fn.prototype.getY = function (){
+    Fn.prototype.getY = function () {
       console.log(this.y);
     }
     var f1 = new Fn;
@@ -279,8 +279,8 @@
     f1.__proto__.getX();//undefined
     f2.getY();//200
     Fn.prototype.getY();//undefined
-    
-    
+
+
 
 
     // var fullName = 'language';
@@ -295,9 +295,9 @@
     // console.log(obj.prop.getFullName());
     // var test = obj.prop.getFullName;
     // console.log(test());
-    
-    
-    
+
+
+
     // var name = 'window';
     // var Tom = {
     //   name : 'Tom',
@@ -358,10 +358,35 @@
     // f2.bb();
     // f2.aa();
     // f2.__proto__.aa();
-    
-    
 
-    
+
+
+
+    /* (a ==1 && a==2 && a==3) 的值可以是true吗？ */
+    /* const a = { value: 0 };
+    a.valueOf = function () {
+      return this.value += 1;
+    };
+
+    console.log(a == 1 && a == 2 && a == 3); //true */
+    /**
+     * 
+     * 值的转化过程如下
+
+        如果输入Input是基本类型, 就返回这个值
+        如果输入变量是Object类型, 那么调用input.valueOf(). 如果返回结果是基本类型，就返回这个指
+        如果都不是的话就调用input.toString(). 如果结果是基本类型, 就返回它
+        如果以上都不可以，就会抛出一个类型错误TypeError， 表示转化input变量到基本类型失败。
+     */
+    //(a === 1 && a === 2 && a ===3)的值也能是true吗？
+   /*  var value = 0; //window.value
+    Object.defineProperty(window, 'a', {
+      get: function () {
+        return this.value += 1;
+      }
+    });
+
+    console.log(a === 1 && a === 2 && a === 3) // true */
   </script>
 </body>
 
