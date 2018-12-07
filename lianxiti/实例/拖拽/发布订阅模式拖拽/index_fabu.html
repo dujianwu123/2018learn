@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      width: 100px;
+      height: 100px;
+      background: pink;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    #box2 {
+      background: yellow;
+      left: 100px;
+      top: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+  <div id="box2"></div>
+  <script src="./subscribe.js"></script>
+  <!-- <script src="./1_水运动.js"></script> -->
+  <!-- <script src="./2_水平加垂直.js"></script> -->
+  <script src="./drag.js"></script>
+  <script>
+    let drag1 = new Drag(box);
+    let drag2 = new Drag(box2);
+
+    let change = function change(curEle) {
+      [].slice.call(document.querySelectorAll('div')).forEach(element => {
+        element.style.zIndex = 0;
+      });;
+      curEle.style.zIndex = 1
+    }
+    drag1.subDown.add(change);
+    drag2.subDown.add(change);
+
+    //1、移动中随时计算速度
+    let computedFly = function computedFly(curEle) {
+      if (!curEle.lastFly) {
+        curEle.lastFly = curEle.offsetLeft;
+        curEle.speedFly = 0;
+        return;
+      }
+      curEle.speedFly = curEle.offsetLeft - curEle.lastFly;
+      curEle.lastFly = curEle.offsetLeft;
+    };
+    drag1.subMove.add(computedFly);
+    drag2.subMove.add(computedFly);
+
+    //2、离开的时候做一些事情（根据获取的speedfly）让元素运动起来
+    let animateFly = function animateFly(curEle) {
+      let minL = 0;
+      let maxL = document.documentElement.clientWidth - curEle.offsetWidth;
+      let speed = curEle.speedFly;
+      let dir = 'rihgt';
+      speed < 0 ? dir = 'left' : null;
+      speed = Math.abs(speed);
+      curEle.flyTimer = setInterval(() => {
+        speed *= 0.98;
+        if (speed <= 0.5) {
+          clearInterval(curEle.flyTimer);
+          return;
+        }
+        let curL = curEle.offsetLeft;
+        if (dir === 'right') {
+          if (curL >= maxL) {
+            //到达有边界，往左走
+            curEle.style.left = maxL + 'px';
+            dir = 'left';
+            return;
+          }
+          curL += speed;
+        } else {
+          if (curL <= minL) {
+            //到达左边界，往右走
+            curEle.style.left = minL + 'px';
+            dir = 'right';
+            return;
+          }
+          curL -= speed;
+        }
+
+        curEle.style.left = curL + 'px'
+      }, 17);
+    }
+    drag1.add(animateFly);
+    drag2.add(animateFly);
+    //3、当按住盒子的时候，还要结束当前所有正在运动的动画
+    let stopAnimate = function stopAnimate(curEle) {
+      clearInterval(curEle.flyTimer);
+      clearInterval(curEle.dropTimer);
+      curEle.speedFly = undefined;
+    }
+    drag1.subDown.add(stopAnimate);
+    drag2.subDown.add(stopAnimate);
+
+    //4、实现垂直方向的运动
+    let animateDrop = function animateDrop(curEle) {
+      let speed = 9.8;
+      let minT = 0;
+      let maxT = document.documentElement.clientHeight - curEle.offsetHeight;
+      let flag = 0;
+      curEle.dropTimer = setInterval(() => {
+        console.log(1);
+        if (flag > 1) {
+          clearInterval(curEle.dropTimer);
+          return;
+        }
+        speed += 9.8;
+        speed *= 0.98;
+        let curT = curEle.offsetTop;
+        curT += speed;
+        if (curT >= maxT) {
+          curEle.style.top = maxT + 'px';
+          speed *= -1;
+          flag++;
+          return;
+        }
+        if (curT <= minT) {
+          curEle.style.top = minT + 'px';
+          speed *= -1;
+          return;
+        }
+        curEle.style.top = curT + 'px';
+        flag = 0;
+      }, 17);
+    }
+    drag1.add(animateDrop);
+    drag2.add(animateDrop);
+  </script>
+</body>
+
+</html>
