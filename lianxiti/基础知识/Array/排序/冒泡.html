@@ -12,18 +12,18 @@
 
   <script type="text/javascript">
     var arr = [1, 3, 4, 5, 2, 7];
-    function maopao(arr) {
-      for (var i = 0; i < arr.length - 1; i++) {
-        for (var j = 0; j < arr.length - 1 - i; j++) {
-          if (arr[j] > arr[j + 1]) {
-            arr[j] = arr[j] + arr[j + 1];
-            arr[j + 1] = arr[j] - arr[j + 1];
-            arr[j] = arr[j] - arr[j + 1];
-          }
-        }
-      }
-      return arr;
-    }
+    // function maopao(arr) {
+    //   for (var i = 0; i < arr.length - 1; i++) {
+    //     for (var j = 0; j < arr.length - 1 - i; j++) {
+    //       if (arr[j] > arr[j + 1]) {
+    //         arr[j] = arr[j] + arr[j + 1];
+    //         arr[j + 1] = arr[j] - arr[j + 1];
+    //         arr[j] = arr[j] - arr[j + 1];
+    //       }
+    //     }
+    //   }
+    //   return arr;
+    // }
 
     function maopao2(arr) {
       for (var i = 0; i < arr.length - 1; i++) {
@@ -38,9 +38,9 @@
       return arr;
     }
 
-    function maopao3 (arr){
+    // function maopao3 (arr){
 
-    }
+    // }
     console.log(maopao2(arr));
   </script>
 </body>

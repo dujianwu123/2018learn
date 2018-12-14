@@ -1,0 +1,77 @@
+@import "./reset.min.less";
+html{
+  font-size: 100px;/*640px设计稿尺寸中*/
+}
+html,body{
+  height: 100%;
+  overflow: hidden;
+  background: #f4f4f4;
+  font-family: 'Microsoft JhengHei';
+}
+.mainBox{
+  margin: 0 auto;
+  max-width: 640px;
+  height: 100%;
+  background: #fff;
+}
+.loadingBox{
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+// loading
+.loadingBox{
+  background: #000;
+  .title{
+    width: 100%;
+    height: 1.4rem;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);//居中
+    margin-top: -1.5rem;//居中后，偏上150px
+    text-align: center;
+    color: #fff;
+
+    h1{
+      line-height: .75rem;
+      font-size: .5rem;
+    }
+    h2{
+      padding-top: .2rem;
+      line-height: .45rem;
+      letter-spacing: .04rem;
+    }
+  }
+  .progress{
+    width: 4.6rem;
+    height: .3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    margin-top: 1rem;
+    background: #fff;
+    .current{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: -webkit-linear-gradient(left bottom,#5cb85c 0%,#5cb85c 25%,#74c274 25%,#74c274 50%,#5cb85c 50%,#5cb85c 75%,#74c274 75%,#74c274 100%) ;
+      background-size: .3rem .3rem;
+      animation: loadingMove 1s linear 0s infinite both;
+      /*给current设置一个过渡动画：当我们在JS中控制它的宽度在变化的时候，给其一个平稳的过渡动画效果（而不生硬的改变）*/
+      transition: .3s;
+    }
+  }
+}
+
+@keyframes loadingMove{
+  0%{
+    background-position: 0 0;
+  }
+  100%{
+    background-position: 0 -.3rem;
+  }
+}
