@@ -32,3 +32,89 @@
 【性能优化】
 一、减少HTTP请求的次数及请求内容的大小
 二、
+
+
+
+//=================一个完整URL的组成
+1.URL/URN/URI
+ URI=URL+URN
+ URI：统一资源标识符
+ URL：统一资源定位符
+ URN：统一资源名称
+
+ 2.http://www.xxxxxx.com:80/stu/index.html?name=xxx&age=20#teacher
+  
+  [传输协议]
+    用来传输客户端和服务器端交互的信息的（类似于快递小哥）
+    HTTP：超文本传输协议（除了传递普通的文本，还可以传递文件流或者进制编码等信息）
+    HTTPS：基于SSL（Secure Sockets Layer 安全套接层）加密的HTTP传输协议，比HTTP更加的安全
+    FTP：文件传输协议，一般用来实现资源文件在服务器上的上传下载
+
+  【域名】Domain Name
+    一级域名（顶级域名）  www.qq.com
+    二级域名             sports.qq.com
+    三级域名             kbs.sports.qq.com
+
+  【端口号】
+    用来区分同一台服务器上不同服务器的标识（基于web服务管理创建服务的时候可以指定），不同服务器之间一般是不能
+    使用相同的端口号的
+
+    HTTP->默认端口号80
+    HTTPS->默认端口号443
+    FTP->默认端口号21
+    如果当前网站服务，采用的是协议对应的默认端口管理，那么当用户输入网址的时候
+    可以不指定端口号，浏览器会默认把用户默认的端口号传递给服务器
+
+    【请求路径名称】
+      path
+      pathname
+      例如：/stu/index.html 一般都是请求当前服务对应的项目目录中，stu文件夹中的index.html页面。
+      但是也有特殊情况，就是当前的URL是被“伪URL重写的”，我们看到的URL请求其实不是真实的请求（例如：https://item.jd.com/4679424.html  这个URL就是被重写的
+      ，它的真实URL地址很可能是https://item.jd.com?detail.jsp?id=4679424）
+
+      【问号传参及哈希值】
+        ?xxx=xxx&...#xxx
+        在HTTP事务中，问号传参是客户端把信息传递给服务器的一种方式（也有可能是跳转到某一个页面，把参数值传递给页面用来标识的）
+        哈希值一般都跟客户端服务器交互没啥关系，主要用于页面中的锚点定位和HASH路由切换
+
+//========HTTP报文
+起始行：请求起始行、响应起始行
+首部（头）：请求头、响应头、通用头
+主体：请求主体、响应主体
+
+General 通用头
+Request URL:http://www.baidu.com/  请求地址 
+Request Method: GET 请求方式：GET/POST/DELETE/PUT/HEAD/OPTION
+Status Code: 304 Not Modified  响应的HTTP状态码
+Remote Address: 125.39.174.137:80 主机地址（服务器waiwangip）和端口
+Referrer Policy: no-referrer-when-downgrade
+
+Request Headers 请求头 【客户端设置，服务器接收】
+GET / HTTP/1.1  =>起始行(描述当前请求的一些基本信息：用的是1.1版本传输协议进行内容传输的)
+Host: www.zhufengpeixun.cn
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: ... =>cookie信息一般都是放到头文件中实现和服务器端的数据通信的
+If-Modified-Since: Sun, 06 May 2018 10:02:42 GMT
+
+
+Response Headers 响应头 [服务器端设置，客户端获取]
+```
+HTTP/1.1 304 Not Modified  =>响应起始行（HTTP状态码）
+Date: Tue, 22 May 2018 09:18:56 GMT  =>服务器响应内容时候的“服务器端时间”（客户端获取这个时间的时候已经和真实的时间产生误差了，因为服务器返回内容到客户端接收到，也是需要时间的），并且这个时间是格林尼治时间（比北京时间慢8小时，北京时间是GMT+0800）
+Connection: keep-alive
+ETag: "700a6f-17f43-56b86a77513d3"
+Vary: Accept-Encoding,User-Agent
+Server: yunjiasu-nginx  //=>管理WEB服务的工具
+CF-RAY: 41ee32c192db66b8-TSN
+```
+
+Response [响应主体]
+```
+  服务器返回的是啥就是啥
+```
