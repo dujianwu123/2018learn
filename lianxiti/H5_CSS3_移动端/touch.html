@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+  <script src="./zepto.min.js"></script>
+  <script>
+    /**
+     * click 在移动端是单击事件行为，当触发点击操作，浏览器总会等待300MS，验证是否触发了
+     * 第二次点击操作,没有触发才会执行click对应的方法(click在移动端的300MS延迟问题)
+     * 
+     * 1、不建议大家在移动端使用click（如果非要使用也可以，最好导入一个插件fastclick.min.js就是
+     * 解决300MS延迟的插件）
+     * 2、目前项目中移动端的点击操作基本都是基于第三方类库（事件库完成的）
+     * zepto:提供了移动端常用的事件操作
+     * touch.js 
+     * hammer.js
+     * ...
+     **/
+
+    let $box = $('div');
+    //->zepto 中提供的专门供移动端操作的事件方法
+    // $box.tap(ev=>{
+    //   //点击
+    //   console.log(1);
+    // });
+    // $box.singleTap(ev=>{
+    //   //单击
+    //   console.log(22);
+    // });
+    // $box.doubleTap(ev=>{
+    //   //双击
+    //   console.log(33);
+    // });
+    // $box.longTap(ev=>{
+    //   //长按
+    //   console.log(444444);
+    // });
+    // $box.swipe / swipeLeft / swipeRight / swipeUp / swipeDown
+    // pinchIn / pinchOut
+
+
+    $box.get(0).ontouchstart = function (ev) {
+      /**
+       * TouchEvent ：手指事件对象
+       *    changedTouches
+       *    touches
+       *    手指操作的信息集合，集合中记录了每一根操作的手指的相关信息（包含出发点的坐标位置）
+       * 
+       *    touches记录的信息只有手指在屏幕上才有，也就是手指离开屏幕的时候信息就消失了
+       *    changedTouches 本意上记录的是改变的值，即使手指离开，信息值也在
+       **/
+
+      //按下时记录手指的起始位置
+      let point = ev.changedTouches[0];
+      this.strX = point.clientX;
+      this.strY = point.clientY;
+      this.isMove = false;
+    }
+    $box.get(0).ontouchmove = function (ev) {
+      let point = ev.changedTouches[0];
+      this.changeX = point.clientX - this.strX;
+      this.changeY = point.clientY - this.strY;
+      if (Math.abs(this.changeX) > 10 || Math.abs(this.changeY) > 10) {
+          //->10是操作误差值
+          this.isMove = true;
+          return;
+      }
+      this.isMove = false;
+    }
+    $box.get(0).ontouchend = function (ev) {
+        if(this.isMove){
+            //->滑动
+            return ;
+        }
+        //->点击
+        console.log('我是点击');
+    }
+  </script>
+</body>
+
+</html>
