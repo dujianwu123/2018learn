@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "babel-preset-env": "^1.7.0",
+    "jquery": "1.11.3",
     "yarn": "^1.12.3"
   }
 }

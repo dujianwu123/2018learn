@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>距离抢购还剩<span>--:--:--</span></div>
+</body>
+<script>
+  //两个时间格式的相减，得到的是毫秒差
+  let span = document.querySelector('span');
+  let _serverTime = null;
+  function daojishi() {
+    //->这样处理也有一个问题：一个客户端每间隔1秒都会向服务器发送一个新的请求，这样
+    //下去访问用户多，服务器就爆了
+    //解决办法一开始的时候创建个全局变量存一下
+    let promise = queryFuWuQiDate();
+    promise instanceof Promise ? promise.then(fn):fn(_serverTime);
+   
+
+    function fn(date) {
+      let newDate = date;//这个应该是服务器时间才对
+      let targetDate = new Date('2018/12/23 00:54:00');
+      let time = parseInt((targetDate - newDate) / 1000);
+      console.log(time);
+      if (time > 0) {
+        let h = parseInt(time / 3600);
+        h > 9 ? null : h = '0' + h;
+        time %= 3600;
+        let m = parseInt(time / 60);
+        m > 9 ? null : m = '0' + m;
+        time %= 60;
+        let s = time;
+        s > 9 ? null : s = '0' + s;
+        span.innerHTML = `${h}:${m}:${s}`;
+        return;
+      }
+      span.innerHTML = `00:00:00`;
+      clearInterval(autoTimer);
+    }
+
+  }
+
+  //从服务器获取时间(获取响应头中的时间信息即可)
+  function queryFuWuQiDate() {
+    //->从服务器获取时间会存在一个问题：由于服务器端返回数据需要时间，所以客户端拿到
+    //返回的‘服务器时间’的时候，已经过去一会了，导致获取的时间和真实的时间是有一定误差的，
+    //这个误差越小越好，
+    //那么如何减小误差
+    /**
+     * 1.在AJAX为2的时候就从响应头中获取信息，而不是等到更靠后的状态4
+     * 2.请求方式设置为HERD，只获取响应头信息即可，响应主体内容不需要
+     * 3.特殊：即使我们想服务器发送一个不存在的请求地址，返回的是404状态码，但是响应头信息中都会存在
+     * 服务器的时间（不建议使用，不友好）
+    **/
+
+    //第二次执行，用之前的全局变量值，但是需要把这个值手动累加1秒=1000毫秒
+    if (_serverTime) {
+      _serverTime = new Date(_serverTime.getTime() + 1000);
+      return _serverTime;
+    }
+    return new Promise(function (resolve, reject) {
+
+      //第一次向服务器发送请求:把获取的结果存储到全局中
+      let xhr = new XMLHttpRequest();
+      let serverTime = null;
+      xhr.open('HEAD', './json/data.json');
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 2) {
+          serverTime = new Date(xhr.getResponseHeader('date'));
+          _serverTime = serverTime;
+          resolve(serverTime);
+        }
+      };
+      xhr.send(null);
+    });
+  }
+
+
+  // pro.then((d) => {
+  //   console.log(d);
+  // });
+  daojishi();
+  let autoTimer = setInterval(() => {
+    daojishi();
+  }, 1000);
+</script>
+
+</html>

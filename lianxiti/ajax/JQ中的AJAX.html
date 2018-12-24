@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    //-> $.ajax([url],options)
+    /**
+     * DATA-TYPE:预设置获取结果的数据格式 TEXT/JSON/JSONP/HTML/SCRIPT...(服务器返回给客户端的响应主体中的内容一般都是字符串[JSON格式居多]),
+     * 而设置DATA-TYPE='JSON',JQ会内部把获取的字符串转为JSON格式的对象，->'他不会影响服务器返回的结果，只是把返回的结果进行了二次处理'
+     * 
+     * ASYNC:设置同步或者异步（true->异步  false->同步）
+     * CACHE:设置GET请求下是否建立缓存（默认true->建立缓存 FALSE->不建立缓存）
+     * 当我们设置FALSE，并且当前请求是GET请求，JQ会在请求的URL地址末尾追加随机数
+     * 
+     * 
+     * 
+     **/
+    $.ajax({
+      url:'https://www.easy-asdmock.com/mock/5c1f0be895d59f6b419dff16/example/ajaxTest',
+      method: 'GET',
+      data:{},
+      dataType: 'json',
+      async: true,
+      cache:true,
+      success:(result,textStatus,xhr)=>{
+        console.log(result,textStatus,xhr.status);
+      },
+      error:(e)=>{
+        console.log(e);
+        console.log(result,textStatus,xhr.status);
+      }
+    });
+  </script>
+</body>
+</html>
