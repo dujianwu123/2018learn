@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="input">
+  <script>
+    let obj = {};
+    // Object.defineProperty(obj,'name',{
+    //   configurable: false,//是否可删除
+    //   writable: false,//是否可重新赋值
+    //   enumerable: false,//是否可枚举
+    //   value:1
+    // });
+    
+    let temp ={};
+    Object.defineProperty(obj,'name',{
+      get(){//取obj的属性会触发
+          return temp.name
+      },
+      set(val){//给obj赋值的时候会触发
+        temp['name'] = val;
+        input.value = val;
+      }
+    });
+    input.value = obj.name;//页面一加载时  会调用get方法
+    input.addEventListener('input',function(){
+      obj.name = this.value;
+    });
+  </script>
+</body>
+</html>

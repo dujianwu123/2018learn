@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+  <style>
+    .x{
+      background: green;
+    }
+    .y{
+      font-size: 30px;
+    }
+    .z{
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- :class绑定的样式和class绑定的不冲突 -->
+    <!-- 1) {className:isActive} -->
+    <div class="x y" :class="{z:flag}">aaa</div>
+    <div class="x" :class="[class1,class2]">aaa</div>
+    隔行变色</br>
+    <div v-for="(item,index) in 10" :class="{x:index%2}" :key="index">wq</div>
+  </div>
+
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    //class = 'a b c' style="background: color"
+    //第一种方式是对象  第二种方式是数组
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        class1:'z',
+        class2:'y',
+        flag:true
+      }
+    });
+  </script>
+</body>
+
+</html>

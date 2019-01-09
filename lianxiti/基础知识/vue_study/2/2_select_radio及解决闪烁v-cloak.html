@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+  <style>
+    [v-cloak]{
+      display:none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 可以使用v-cloak解决闪烁（块）问题，后期都可以不采用，使用v-cloak要加样式 -->
+  <div id="app" v-cloak>
+      <!-- multiple 多选 -->
+    <select v-model="a">
+      <option value="" disabled>--请选择--</option>
+      <option value="1">猫</option>
+      <option value="2">狗</option>
+      <option value="3">猪</option>
+    </select>
+    <!-- 如果value属性不写默认取得是option中的文本值，请选择这一项要加disabled -->
+    <!-- 如果select是多选框  则数据类型要是数组类型 -->
+    {{a}}
+  </br>
+    ----------------------
+  </br>
+  <input type="radio" v-model='gender' value="0">男
+  <input type="radio" v-model='gender' value="1">女
+  {{gender}}
+  </div>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        a:'',
+        gender:0
+      }
+    });
+  </script>
+</body>
+
+</html>

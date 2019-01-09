@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 表单元素 input checkout textarea radio select -->
+    <!-- vue的“指令”directive 只是dom上的行间属性，vue给这类属性赋予一定的意义  来实现特殊的功能 所有指令都以v-开头 -->
+    <!-- 在表单中vue属性默认情况下会被vue忽略掉 checked selected 都没有意义-->
+    
+    <!--***** v-model会将msg的值赋予输入框，输入框的值改变了会影响数据 -->
+    <input type="text" v-model="msg">
+    {{msg}}
+    <!--***** v-text === {{}} 防止{{}}出现在页面上 初始化的时候下面的vue.js还没有加载，会将{{msg}}闪一下 -->
+    <div v-text="msg">v-text写了这里就不要写了</div>
+    <!--***** v-once 只绑定一次  当数据再次发生变化也不会导致页面刷新-->
+    <div v-once>{{msg}}{{msg}}{{msg}}</div>
+    <!--***** v-html 把html字符当做html渲染，一定是可以信任的html -->
+    {{p}}
+    <div v-html="p"></div>
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+      let vm = new Vue({
+        el:"#app",
+        data:{
+          msg:'hello world !!',
+          p:'<p>hahahaha</p>'
+        }
+      });
+  </script>
+</body>
+</html>

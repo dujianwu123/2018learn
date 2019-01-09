@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+  <!-- v-on === @ -->
+  <div id="app" v-on:click="clickFn">asdsadsa</div>
+  <!-- 如果不传递参数  则不要写括号会自动传入事件源，如果写括号了要手动传入$event属性 -->
+  <div id="app" v-on:click="clickFn($event,1)">asdsadsa</div>
+  
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let vm = new Vue({//根实例
+      el: "#app",
+      data: {//都是数据
+      },
+      methods:{//methods和data中的数据会全部放到vm上，而且名字不能重复，冲突会报错
+        //methods中的this 指向的都是实例  即vm,这里不能随便用箭头函数会改变this
+        clickFn(event,a){
+          alert(11);
+          console.log(this);
+          console.log(event);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

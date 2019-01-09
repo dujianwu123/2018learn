@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <input type="text" v-model="msg" @keydown.enter = 'add'>
+    <ul>
+      <li v-for="(item,index) in arr">
+        {{item}}
+        <button @click="del(index)">删除</button>
+      </li>
+    </ul>
+  </div>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let vm = new Vue({
+      el: "#app",
+      methods:{
+        add(){
+          this.arr.unshift(this.msg);
+          this.msg='';
+        },
+        del(i){
+          this.arr = this.arr.filter(function(item,index){
+              return i!== index
+          });
+        }
+      },
+      data: {
+        msg:'',
+        arr:[]
+      }
+    });
+  </script>
+</body>
+
+</html>

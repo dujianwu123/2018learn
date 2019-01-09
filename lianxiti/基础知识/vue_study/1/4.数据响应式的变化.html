@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{a.school}}
+    {{b.school}}
+   
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    //vue会循环data中的数据（数据劫持）  依次的增加getter和setter 如果不初使化下，那么就没有getter和setter两个方法那么就不能对页面响应
+      let vm = new Vue({
+        el:"#app",
+        data:{
+            a:{school:1},//初始化 方法一
+            b:{}
+        }
+      });
+      //使用变量时  先要初始化，否则新加的属性不会导致页面刷新
+  
+      //给谁加，加什么属性，值是什么 方法二
+      vm.$set(vm.b,'school',2);//此方法可以给对象添加响应式的变化
+  
+      //上面的方法，加一个或少量还可以，如果批量的化用如下
+      
+      /**
+       * 方法三
+       * 替换原对象
+       **/
+      vm.a = {school:'xx',age:8,address:'sss'};
+  </script>
+</body>
+</html>

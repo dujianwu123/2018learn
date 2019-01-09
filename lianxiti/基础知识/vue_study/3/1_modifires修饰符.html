@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- 事件.stop 阻止冒泡,阻止事件传播  -->
+    <!-- 事件.capture 捕获  -->
+    <!-- 事件.prevent 捕获  -->
+    <!-- 事件.once 只绑定一次  -->
+    <!-- 事件.self 判断事件源，之点击自己触发  -->
+    <div class="parent" @click="parent">parent
+      <div class="child" @click="child">child
+        <div class="grandson" @click.stop="grandson">grandson</div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let vm = new Vue({
+      el: "#app",
+      data: {
+      },
+      methods:{
+        parent(){
+          alert('parent');
+        },
+        child(){
+          alert('child');
+        },
+        grandson(){
+          alert('grandson');
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

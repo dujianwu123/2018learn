@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 表达式，可以放赋值（djw=2）  取值 djw   三元 djw===2?2:0 -->
+    {{djw}}
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+      let vm = new Vue({// vm == viewModel
+        el:"#app",//告诉vue能管理哪个部分
+        data:{//data中的数据会被vm所代理
+            djw:'hello world !!'//可以通过vm.djw 取到对应的内容
+        }
+      });//Object.defineProperty
+  </script>
+</body>
+</html>

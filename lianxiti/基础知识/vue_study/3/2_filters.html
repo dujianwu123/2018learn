@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app1">
+    {{'1' | my}}
+  </div>
+  <div id="app2">
+    {{'2' | my}}
+  </div>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    Vue.filter('my',(data)=>{//全局过滤器，过滤器要放在页面的顶部
+      return  'jieguo--'+data;
+    });
+    let vm1 = new Vue({
+      el: "#app1"
+    });
+    let vm2 = new Vue({
+      el: "#app2"
+    });
+  </script>
+</body>
+
+</html>

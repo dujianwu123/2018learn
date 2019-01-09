@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <input type="checkbox" v-model="checkAll"></br>
+    <div v-for="item in checks">
+      <input type="checkbox" v-model="item.isF">
+    </div>
+  </div>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    /**
+     * computed 计算“属性” 不是方法
+     * 
+     * 方法methods不会有缓存，computed会根据依赖（归vue管理的数据，可以响应式变化的）的属性进行缓存
+     * 两部分组成有get和set（不能只写set）一般情况下通过js赋值影响其他人
+     * 或者表单元素设置值的时候会调用set方法
+     **/
+    let vm = new Vue({
+      el: "#app",
+      computed:{
+        checkAll:{
+          get(){
+            return this.checks.every(item=>item.isF);
+          },
+          set(val){
+            return this.checks.forEach(element => {
+              element.isF = val;
+            });
+          }
+        }
+      },
+      data: {
+        checks:[{isF:true},{isF:false}]
+      }
+    });
+  </script>
+</body>
+
+</html>

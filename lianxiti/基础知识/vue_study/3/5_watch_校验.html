@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <input type="text" v-model="a">
+    {{msg}}
+  </div>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let vm = new Vue({
+      el: "#app",
+      // watch:{//只有值变化的时候才会触发，支持异步了，其他情况我们更善于使用computed
+      //   a(newVal,oldVal){//watch的属性名字要和观察的人的名字一致
+      //     if(newVal.length<3){
+      //       this.msg='太少';
+      //       return ;
+      //     }
+      //     if(newVal.length>6){
+      //       this.msg='太多';
+      //       return ;
+      //     }
+      //     this.msg = "";
+      //   }
+      // },
+      data: {
+        a: '',
+        msg: ''
+      }
+    });
+    vm.$watch('a', (newVal, oldVal) => {//watch的属性名字要和观察的人的名字一致
+      vm.msg = '.........';
+      setTimeout(() => {
+        if (newVal.length < 3) {
+          vm.msg = '太少';
+          return;
+        }
+        if (newVal.length > 6) {
+          vm.msg = '太多';
+          return;
+        }
+        vm.msg = "";
+      }, 2000);
+    });
+  </script>
+</body>
+
+</html>

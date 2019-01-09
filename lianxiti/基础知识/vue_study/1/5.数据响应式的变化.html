@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    {{arr[2]}}
+    {{arr}}
+  </div>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        arr: [1,2,3,4,5]
+      }
+    });//去改变数组中的某一项是监控不到的,也不能使用改变数组长度的方法
+    // vm.arr[0] = 100;错误写法
+    // vm.arr.length -= 2;错误写法
+    //编译方法：pop push shift unshift sort reserve splice
+    vm.arr = vm.arr.map(item=>item*3);//filter map
+  </script>
+</body>
+
+</html>
