@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <p ref="mm">{{msg}}</p>
+    <p ref="mm">{{msg}}</p>
+    <p ref="mm">{{msg}}</p>
+    <div ref="warp">
+        <div v-for="a in arr" ref="ff">{{a}}</div>
+    </div>
+  </div>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    /**
+     * this.$data vm上的数据
+     * this.$watch 监控
+     * this.$el 当前el元素
+     * this.$set 后加的属性实现响应式变化
+     * this.$options 把下面所有的属性都能获取出来,比如下面的a没有任何意义也可以获取到
+     * this.$nextTick 异步方法，等待渲染dom完成后
+     * this.$refs  
+     **/
+    let vm = new Vue({
+      a:1,
+      el: "#app",
+      data: {
+        msg:'aaaa',
+        arr:[1,2,3]
+      },
+      mounted(){
+        // this.$nextTick(()=>{//异步方法，等待渲染dom完成后来获取vm
+        //   console.log(vm);
+        // });
+
+        //如果dom元素不是通过v-for循环出来的 只能获取到一个，通过v-for循环出来的可以获取多个
+        // console.log(this.$refs.mm);
+        // console.log(this.$refs.ff);
+
+        this.arr = [1,2,3,4];//dom渲染是异步的
+        // console.log(this.$refs.warp.children.length);//3
+        this.$nextTick(()=>{//如果数据变化后想获取真实dom中的内容，需要等待页面渲染完毕后在去获取，所有的dom操作 最好nextTick中
+          console.log(this.$refs.warp.children.length);//4
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <modal></modal>
+    <modal><h1>是否删除？</h1></modal>
+    <modal><span>是否确认？</span></modal> -->
+    <!-- 这里放的内容均属于父级当前模板的  只有属性名是属于组件的 -->
+    <!-- m属于组件的，ss是父级的 fn也是父级的 -->
+    <modal :m="ss">
+      <a href="www.baidu.com" @click="fn">xxx</a>
+      <p slot="content">内容</p>
+      <h1 slot="title">标题</h1>
+      <a href="www.baidu.com">xxx</a>
+    </modal>
+  </div>
+  <!-- 模板中只能有一个根元素 可以通过元素属性定制模板-->
+  <template id="modal">
+    <!-- slot 定制模板  -->
+    <div>
+      <!-- 正常情况下，model组件中包含的会被下面<div>xxx</div>替换掉，这时候可以用slot来把中间包含的提取出来显示到组件中 -->
+      <!-- xxx<slot></slot> -->
+      <!-- slot中可以放置一些默认的内容，如果传递了内容则替换掉 -->
+      
+      <!-- name不写就是default，上面不写的对应的是default，这样就可以规定顺序了 -->
+      <slot name="title">默认标题</slot>
+      <slot name="content">默认内容</slot>
+      <slot name="default">我是默认的</slot>
+    </div>
+    <!-- <div></div> -->
+  </template>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let modal = {
+      template:'#modal'
+    };
+    let vm = new Vue({
+      el: "#app",
+      data: {
+      },
+      components:{
+        modal
+      }
+    });
+  </script>
+</body>
+
+</html>

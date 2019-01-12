@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <djw-f></djw-f>
+  </div>
+  <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    /**
+     * 分类 页面级组件：1.个页面是一个组件
+     *                 2.将可复用的部分抽离出来  基础组件
+     * 好处：提高开发效率、方便重复使用、便于协同开发、更容易被管理和维护
+     **/
+    //组件名不要带有大写  多个单词用 -
+    //只要组件名和定义名字相同是可以的（首字母可以大写）
+    // djw-f djwF 都行
+    Vue.component('djwF', {//一个对象可以看成一个组件
+      template:'<div>{{msg}}</div>',
+      data(){//组件中的数据必须是函数类型  返回一个实例作为组件的数据
+        return {
+          msg:'你好'
+        }
+      }
+    });
+    let vm = new Vue({
+      el: "#app",
+      data: {
+      }
+    });
+  </script>
+</body>
+
+</html>

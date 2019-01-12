@@ -15,13 +15,41 @@
   </div>
   <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
   <script type="text/javascript">
-  //生命周期
+  /**
+   * 生命周期
+   * beforeCreate     created
+   * beforeMount      mounted
+   * beforeUpdate     updated
+   * beforeDestroy    destroyed
+   **/
     let vm = new Vue({// 根实例，初始化会调用很多方法（钩子函数）
-      el: "#app",
+      beforeCreate(){},//1、此方法用不到
       data: {
-        
+        a:1
+      },
+      create(){
+        //2、获取ajax，初始化操作
+      },
+      beforeMount(){//挂载  把dom和数据编译好后扔到页面上去
+        alert(1);
+      },
+      template:'<div>{{a}}</div>',//4、如果有template属性会用模板替换掉外部html，只要有此属性app中的内容就没有任何意义了
+      mounted(){},//真实dom渲染完了，可以操作dom了
+      beforeUpdate(){//页面依赖到的数据有变化时，一般用watch替换掉
+        alert('更新之前');
+      },
+      updated(){
+        alert('更新后');
+      },
+      beforeDestroy(){
+        alert('销毁前');
+      },
+      destroyed(){
+        alert('销毁后');
       }
     });
+    vm.$mount('#app');//3、就是el ，要保证有编译的元素
+    // vm.$destroy();
   </script>
 </body>
 

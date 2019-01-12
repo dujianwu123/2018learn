@@ -11,20 +11,30 @@
 <body>
 
   <div id="app">
-    <div :style="{color:'red',backgroundColor:'blue'}">haha</div>
-    <div :style=[,sty2]>hehe</div>
+    父亲:{{money}}
+    <child :m.sync="money" ></child>
   </div>
   <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
   <script type="text/javascript">
+    
     let vm = new Vue({
       el: "#app",
       data: {
-        sty1:{
-          color:'green',
-          backgroundColor:'grey'
-        },
-        sty2:{
-          textAlign:'center'
+        money: 400
+      },
+      components: {
+        child: {
+          props: {
+            m: {
+              type:[String,Number]
+            }
+          },
+          methods:{
+            child_btn(){
+              this.$emit('update:m',800);
+            }
+          },
+          template: '<div @click="child_btn()">儿子:{{m}}</div>'
         }
       }
     });

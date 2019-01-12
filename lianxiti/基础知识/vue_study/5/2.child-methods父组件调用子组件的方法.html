@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+<!-- 父组件调用子组件的方法  用ref -->
+<body>
+
+  <div id="app">
+    <loading ref="load"></loading>
+  </div>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+  let loading = {
+    template:'<div v-show="flag">疯狂加载中...</div>',
+    data(){
+      return {
+        flag:true
+      }
+    },
+    methods:{
+      hide(){
+        this.flag = false;
+      }
+    }
+  };
+    let vm = new Vue({
+      el: "#app",
+      data: {
+      },
+      components:{
+        loading
+      },
+      mounted(){//ref 如果放在组件上  获取的是组件的实例  并不是组件的dom元素
+        console.log(this.$refs);
+        // this.$refs.load.hide();
+        this.$refs.load.$el.style.backgroundColor = 'red';
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .wrapClass{
+      width:100%;
+      height:100%;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      opacity: 0.7;
+      background: grey;
+    }
+    .wrapClass>div{
+      width: 300px;
+      height: 200px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      border: 2px solid blue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <button @click="flag=true">弹</button>
+    <!-- 如果show的值是true则显示，如果是false则隐藏 @close对应的函数是点击关闭按钮时触发的函数 -->
+    <!-- <chuang></chuang> -->
+    <model :show="flag" @parent_close="flag=false"></model>
+  </div>
+  <!-- template中只能有一个根元素 -->
+  <template id="dialog">
+    <div class="wrapClass" v-show="show">
+      <div>
+        <button @click="closeFn">close</button>
+      </div>
+    </div>
+  </template>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let model = {
+      props: ["show"],
+      template: '#dialog',
+      methods: {
+        closeFn() {
+          this.$emit("parent_close");
+        }
+      }
+    };
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        flag: false
+      },
+      components: {
+        model
+      },
+    });
+  </script>
+</body>
+
+</html>

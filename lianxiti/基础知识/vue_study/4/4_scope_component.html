@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <djw></djw>
+    <djw2></djw2>
+  </div>
+  <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+  //局部组件  使用的三部曲 1.创建这个组件 2.注册这个组件 3.使用这个组件
+  //组件是相互独立的，不能直接跨作用域  实例也是一个组件，组件中拥有生命周期函数
+  let obj = {school:'zfpx'};//如果组件共用了数据一会导致同时更新
+  //子组件直接使用父组件的数据（组件之间的数据交互）
+  //组件理论上可以无限嵌套
+  let zujian = {
+    template:'<div @click="fn">xxxxx1{{school}}</div>',
+    data(){
+      return obj;
+    },
+    methods:{
+      fn(){
+        // 组件里的this指的是当前作用域，即这个组件
+        this.school = 'ss'
+      }
+    }
+  }; 
+  let zujian2 = {
+    template:'<div>xxxxx2{{school}}</div>',
+    data(){
+      return obj;
+    }
+  };  
+  let vm = new Vue({
+      el: "#app",
+      components:{
+        djw:zujian,
+        djw2:zujian2,
+      },
+      data: {
+      }
+    });
+  </script>
+</body>
+
+</html>
