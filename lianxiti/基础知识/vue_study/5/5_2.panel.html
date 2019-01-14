@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- <panel type="primary"></panel>
+    <panel type="danger"></panel> -->
+    <panel type="warning" @title-text="title">
+      <h3 slot="title">这是一篇vue的使用</h3>
+      <div slot="content">
+        <h5>内容区</h5>
+        <p>组件的属性传递</p>
+        <p>slot的用法</p>
+        <p>ref的使用</p>
+        <p>nextTick的用法</p>
+      </div>
+      <footer>作者:djw</footer>
+    </panel>
+
+    <panel type="primary" @title-text="title">
+      <h3 slot="title">这是一篇js的使用</h3>
+      <div slot="content">
+        <h5>内容区</h5>
+        <p>组件的属性传递</p>
+        <p>slot的用法</p>
+        <p>ref的使用</p>
+        <p>nextTick的用法</p>
+      </div>
+    </panel>
+
+  </div>
+  <template id="panel_id">
+    <div class="panel" :class="[color]">
+      <div class="panel-heading" ref="title">
+        <slot name="title"></slot>
+      </div>
+      <div class="panel-body">
+        <slot name="content"></slot>
+      </div>
+      <div class="panel-footer">
+        <slot name="default"><div>作者：未注明</div></slot>
+        <button @click="say">点我看标题</button>
+      </div>
+    </div>
+  </template>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let panel = {
+      props: {
+        type: {
+          type: [String],
+          default: 'default'
+        }
+      },
+      template: '#panel_id',
+      computed: {
+        color() {
+          return 'panel-' + this.type;
+        }
+      },
+      methods:{
+        say(){
+          this.$emit('title-text',this.$refs.title.innerText);
+        }
+      }
+    };
+    let vm = new Vue({
+      el: "#app",
+      data: {
+      },
+      components: {
+        panel
+      },
+      methods:{
+        title(val){
+          alert(val);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <com1></com1>
+    <com2></com2>
+  </div>
+  <template id="red">
+    <div>
+      <!-- 点击变红让兄弟组件变红 -->
+      <div>{{color}} <button @click="change">变红</button></div>
+    </div>
+  </template>
+  <template id="green">
+    <div>
+      <!-- 点击变红让兄弟组件变绿 -->
+      <div>{{color}} <button @click="change">变绿</button></div>
+    </div>
+  </template>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    let eventBus = new Vue;
+    let com1 = {
+      template: "#red",
+      data() {
+        return {
+          color: "红色",
+          old: "红色"
+        }
+      },
+      created() {
+        eventBus.$on("changeRed", (val) => {
+          this.color = val;
+        });
+      },
+      methods: {
+        change() {
+          eventBus.$emit('changeGreen',this.old);
+        }
+      }
+    };
+    let com2 = {
+      template: "#green",
+      data() {
+        return {
+          color: "绿色",
+          old: "绿色"
+        }
+      },
+      created() {
+        eventBus.$on("changeGreen", (val) => {
+          this.color = val;
+        });
+      },
+      methods: {
+        change() {
+          eventBus.$emit('changeRed',this.old);
+        }
+      }
+    };
+    let vm = new Vue({
+      el: "#app",
+      data: {
+      },
+      components: {
+        com1, com2
+      }
+    });
+  </script>
+</body>
+
+</html>

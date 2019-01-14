@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+  <!-- 编程式导航：在JS跳转页面 -->
+  <div id="app">
+    <!-- //这样设置地址动态一些 -->
+    <router-link :to="{path:'/home'}">首页</router-link>
+    <router-link to="/list">列表页</router-link>
+    <router-view></router-view>
+  </div>
+  <script type="text/javascript" src="../../node_modules/vue/dist/vue.js"></script>
+  <script src="../node_modules/vue-router/dist/vue-router.js"></script>
+  <script type="text/javascript">
+    let home = {
+      template:'<div>首页<button @click="toLink">去列表</button></div>',
+      methods:{
+        toLink(){
+          // this.$router.push('/list');//强制跳转路径
+          this.$router.replace('/list');//路由替换,将当前的历史替换掉
+        }
+      }
+    };
+    let list = {
+      template:'<div>列表页<button @click="back">返回</button></div>',
+      methods:{
+        back(){
+          this.$router.go(-1);//返回某一级
+        }
+      }
+    };
+    let routes = [
+      {path:'/home',component:home},
+      {path:'/list',component:list}
+    ];
+    let router = new VueRouter({
+      routes//每个组件都会拥有一个名字叫 $router的属性(带r的放的都是方法)
+      //还有一个名字叫$route(没带r的存的都是属性)
+    });
+    let vm = new Vue({
+      el: "#app",
+      data: {
+      },
+      router
+    });
+  </script>
+</body>
+
+</html>
