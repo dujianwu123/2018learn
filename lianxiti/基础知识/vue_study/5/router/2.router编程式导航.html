@@ -37,8 +37,11 @@
       }
     };
     let routes = [
+      {path:'',component:home},//默认显示的路由
       {path:'/home',component:home},
-      {path:'/list',component:list}
+      {path:'/list',component:list},
+      // {path:'*',component:list}//这个地方匹配所有，放在最下面，当瞎输入路由是显示，但是只是切换了组件而已上面的链接不会变
+      {path:'*',redirect:'/home'}//路径变  组件也要切换 404的时候
     ];
     let router = new VueRouter({
       routes//每个组件都会拥有一个名字叫 $router的属性(带r的放的都是方法)

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-link to="/detail">详情页</router-link>
+    <router-view></router-view>
+  </div>
+  <template id="detail">
+    <div>
+      <router-link to="/detail/prafile">个人中心</router-link>
+      <router-link to="/detail/about">关于我们</router-link>
+      <router-view></router-view>
+    </div>
+  </template>
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script src="../node_modules/vue-router/dist/vue-router.js"></script>
+  <script type="text/javascript">
+    let home = {template:'<div>home</div>'};
+    let detail = {template:'#detail'};
+    let prafile = {template:'<div>prafile</div>'};
+    let about = {template:'<div>about</div>'};
+    let routes = [
+      {
+        path:'/home',
+        component:home
+      },
+      {
+        path:'/detail',
+        component:detail,
+        children:[//children中的路径永远不带'/',带'/'表示是1级路由
+          {path:'prafile',component:prafile},
+          {path:'about',component:about}
+        ]
+      }
+    ];
+    let router = new VueRouter({routes});
+    let vm = new Vue({
+      el: "#app",
+      data: {
+      },
+      router
+    });
+  </script>
+</body>
+
+</html>

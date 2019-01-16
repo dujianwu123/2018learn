@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge£¬chrome=1" />
+  <title>DJW</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- default--灰色，success--绿色，danger--红色，warning--警告色，info--浅蓝色，primary--蓝色  -->
+    <div class="container">
+      <div class="row">
+        <h2 style="width:100%;" class="text-warning text-center">购物车</h2>
+        <table class="table table-hover table-bordered">
+          <tr>
+            <th>全选 <input type="checkbox" v-model="checkAll"></th>
+            <td>商品</td>
+            <td>单价</td>
+            <td>数量</td>
+            <td>小计</td>
+            <td>操作</td>
+          </tr>
+          <tr v-for="(item,index) in produces">
+            <td><input type="checkbox" v-model="item.isSelected"></td>
+            <td>
+              <img :src="item.productCover" alt="" :title="item.productName">
+              {{item.productInfo}}
+            </td>
+            <td>{{item.productPrice}}</td>
+            <td>
+              <input type="number" v-model.number.lazy="item.productCount">
+            </td>
+            <td>
+              {{item.productPrice*item.productCount | toFixed(2)}}
+            </td>
+            <td>
+                <button class="btn btn-danger" @click="remove(item)">删除</button>
+            </td>
+          </tr>
+          <tr>
+            <td>总价格: {{sum | toFixed(2)}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/axios/dist/axios.js"></script>
+  <script type="text/javascript">
+    let vm = new Vue({
+      el: "#app",
+      filters:{
+        toFixed(input,param1){
+          return '￥' + input.toFixed(param1);
+        }
+      },
+      created(){
+        this.getData();
+      },
+      data:{
+        produces:[]
+      },
+      methods:{
+        getData(){
+          axios('./carts.json','get').then((data)=>{
+            this.produces = data.data;
+          },(err)=>{
+            console.log(err);
+          });
+        },
+        remove(obj){
+          this.produces = this.produces.filter((item,index)=>{
+            return item!==obj;
+          });
+        }
+      },
+      computed:{
+        checkAll:{
+          get(){
+            return this.produces.every(item=>{return item.isSelected});
+          },
+          set(val){
+            this.produces.forEach(item => {
+                item.isSelected = val;
+            });
+          }
+        },
+        sum(){
+          
+            return this.produces.reduce((prev,next)=>{
+            if(!next.isSelected) return prev;
+            return prev + next.productPrice*next.productCount;
+          },0);
+         
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
