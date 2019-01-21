@@ -15,7 +15,7 @@ const obj = {
     new OptimizeCssAssetsPlugin({}),
     new HWP({
       template: './index.html',
-      filename: '../haha.html',//这个会根据output的path生成，默认是都生成到build/js下，但是想让html出来，所以就../xxx.html
+      filename: '../haha.html',//这个会根据output的path生成，默认是都生成到build/js目录下，但是想让html单独出来，所以就../xxx.html，放到build/js目录下的上一级目录
       minify: {//html 压缩成一行
         removeAttributeQuotes: true,
         collapseWhitespace: true
