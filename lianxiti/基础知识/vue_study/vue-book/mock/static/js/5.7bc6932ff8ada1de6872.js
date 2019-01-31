@@ -1,0 +1,2 @@
+webpackJsonp([5],{PcYS:function(e,t){},QV70:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var c={render:function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("collect")])},staticRenderFns:[]};var r=n("VU/8")({data:function(){return{}}},c,!1,function(e){n("PcYS")},"data-v-26050892",null);t.default=r.exports}});
+//# sourceMappingURL=5.7bc6932ff8ada1de6872.js.map

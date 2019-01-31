@@ -16,6 +16,7 @@ function read(cb) {
 function write(data, cb) {
   fs.writeFile(path.resolve(__dirname, './book.json'), JSON.stringify(data), cb);
 }
+let pageSize = 5;//每页显示五个
 
 //获取轮播图 /sliders
 http.createServer((req, res) => {
@@ -25,8 +26,21 @@ http.createServer((req, res) => {
   res.setHeader("X-Powered-By", ' 3.2.1');
   if (req.method == 'OPTIONS') return res.end();
 
-
   let { pathname, query } = url.parse(req.url, true);//true 把query转化成对象
+  if (pathname === '/page') {
+    let offset = parseInt(query.offset) || 0;
+    read(function (books) {
+      //每次偏移量 在偏移的基础上增加五条
+      let result = books.reverse().slice(offset, offset + pageSize);//数据倒序
+      let hasMore = true;//默认有更多
+      if (books.length < offset + pageSize) {// 已经显示的数目 大于了总共条数
+        hasMore = false;
+      }
+      res.setHeader('Content-Type', 'application/json;charset=utf8');
+      res.end(JSON.stringify({ hasMore, books: result }));
+    });
+    return;
+  }
   if (pathname === '/sliders') {
     res.setHeader('Content-Type', 'application/json;charset=utf8');
     return res.end(JSON.stringify(sliders));
@@ -68,8 +82,8 @@ http.createServer((req, res) => {
           read(function (books) {//添加id
             book.bookId = books.length ? books[books.length - 1].bookId + 1 : 1;
             books.push(book);//将数据放到books中，books在内存中
-            write(books,function(){
-                res.end(JSON.stringify(book));
+            write(books, function () {
+              res.end(JSON.stringify(book));
             });
           });
         });
@@ -108,5 +122,6 @@ http.createServer((req, res) => {
         break;
     }
   }
+  
 }).listen(3000);
 
