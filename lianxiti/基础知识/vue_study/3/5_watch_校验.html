@@ -37,6 +37,7 @@
       }
     });
     vm.$watch('a', (newVal, oldVal) => {//watch的属性名字要和观察的人的名字一致
+      console.log(oldVal,newVal);
       vm.msg = '.........';
       setTimeout(() => {
         if (newVal.length < 3) {

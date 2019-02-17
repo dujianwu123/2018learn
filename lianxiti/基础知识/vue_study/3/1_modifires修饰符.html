@@ -13,9 +13,9 @@
   <div id="app">
     <!-- 事件.stop 阻止冒泡,阻止事件传播  -->
     <!-- 事件.capture 捕获  -->
-    <!-- 事件.prevent 捕获  -->
+    <!-- 事件.prevent 阻止默认行为  -->
     <!-- 事件.once 只绑定一次  -->
-    <!-- 事件.self 判断事件源，之点击自己触发  -->
+    <!-- 事件.self 判断事件源，只点击自己触发  -->
     <div class="parent" @click="parent">parent
       <div class="child" @click="child">child
         <div class="grandson" @click.stop="grandson">grandson</div>
