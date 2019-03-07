@@ -25,6 +25,7 @@ Vue.use(VueLazyload, {
 // 图片懒加载
 // console.log(path.resolve('5-121204193948.gif'));
 /* eslint-disable no-new */
+
 //在进入路由之前  每一项都会执行次方法，全局钩子，拦截功能
 router.beforeEach(function(to,from,next){
   document.title = to.meta.title;
@@ -36,9 +37,12 @@ router.beforeEach(function(to,from,next){
   //   next();
   // }
 });
+
+import store from './store';
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

@@ -16,7 +16,10 @@
             <h4>{{book.bookName}}</h4>
             <p>{{book.bookInfo}}</p>
             <b>{{book.bookPrice}}</b>
-            <button @click.stop="remove(book.bookId)">删除</button>
+            <div class="btn-list">
+              <button @click.stop="remove(book.bookId)">删除</button>
+              <button @click.stop="addCart(book)">添加</button>
+            </div>
           </div>
         </router-link>
       </ul>
@@ -28,6 +31,7 @@
 <script>
 import { getBooks, removeBook, pagination } from "../api/index.js";
 import mheader from "../base/MHeader.vue";
+import * as Types from '../store/mutations-type';
 export default {
   created() {
     this.getData();
@@ -36,6 +40,7 @@ export default {
     let scroll = this.$refs.scroll; //获取到要拖拽的元素
     let top = scroll.offsetTop;
     let distance = 0;
+    let isMove = false;//点击添加购物车的时候会走end，防止不走move而走end所以要有这个校验
     scroll.addEventListener(
       "touchstart",
       e => {
@@ -43,6 +48,7 @@ export default {
         if (scroll.scrollTop != 0 || scroll.offsetTop != top) return;
         let start = e.touches[0].pageY; //手指点击的开始
         let move = e => {
+          isMove = true;
           let current = e.touches[0].pageY;
           distance = current - start; //求的拉动的距离  负的就不要了
           if (distance > 0) {
@@ -59,6 +65,8 @@ export default {
           }
         };
         let end = e => {
+          if(!isMove) return;
+          isMove = false;
           clearInterval(this.timer1);
           this.timer1 = setInterval(() => {
             if (distance <= 0) {
@@ -89,7 +97,7 @@ export default {
       books: [],
       offset: 0,
       hasMore: true,
-      isLoading: false //默认是没在加载
+      isLoading: false //默认是没在加载，加载中就不要再去请求了，节流防抖
     };
   },
   components: {
@@ -133,6 +141,9 @@ export default {
           this.more(); //获取更多
         }
       }, 60);
+    },
+    addCart(book){
+      this.$store.commit(Types.ADD_CART,book);
     }
   }
 };
@@ -180,6 +191,10 @@ export default {
     line-height: 30px;
     text-align: center;
     font-size: 20px;
+  }
+  .btn-list{
+    display: flex;
+    justify-content: space-around;
   }
 }
 </style>

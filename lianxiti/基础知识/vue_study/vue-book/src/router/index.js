@@ -40,7 +40,7 @@ export default new Router({
     {
       path: '/collect',
       component: () => import('../components/Collect.vue'),
-      meta: { title:'收藏' }
+      meta: { title:'购物车' }
     },
     { path: '*', redirect: '/home' }
   ]

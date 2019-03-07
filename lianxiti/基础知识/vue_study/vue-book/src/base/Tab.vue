@@ -14,7 +14,7 @@
     </router-link>
     <router-link to="/collect">
       <i class="iconfont icon-shoucang"></i>
-      <span>收藏</span>
+      <span>购物车</span>
     </router-link>
   </div>
 </template>
