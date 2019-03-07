@@ -50,7 +50,7 @@ export default {
     },
     async update() {//点击修改图书信息
       await updateBook(this.bid,this.book);
-      this.$router.push('/list');
+      this.$router.push('/list');//修改完后返回列表页
     }
   },
   components: {

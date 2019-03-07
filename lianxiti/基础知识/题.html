@@ -253,32 +253,32 @@
 
 
 
-    function Fn() {
-      this.x = 100;
-      this.y = 200;
-      this.getX = function () {
-        console.log(this.x);
-      }
-    }
-    Fn.prototype.getX = function () {
-      console.log(this.x);
-    }
-    Fn.prototype.getY = function () {
-      console.log(this.y);
-    }
-    var f1 = new Fn;
-    var f2 = new Fn;
-    console.log(f1.getX === f2.getX);//false
-    console.log(f1.getY === f2.getY);//true
-    console.log(f1.__proto__.getY === Fn.prototype.getY);//true
-    console.log(f1.__proto__.getX === f2.getX);//false
-    console.log(f1.getX === Fn.prototype.getX);//false
-    console.log(f1.constructor);//Fn
-    console.log(Fn.prototype.__proto__.constructor);//Object
-    f1.getX();//100
-    f1.__proto__.getX();//undefined
-    f2.getY();//200
-    Fn.prototype.getY();//undefined
+    // function Fn() {
+    //   this.x = 100;
+    //   this.y = 200;
+    //   this.getX = function () {
+    //     console.log(this.x);
+    //   }
+    // }
+    // Fn.prototype.getX = function () {
+    //   console.log(this.x);
+    // }
+    // Fn.prototype.getY = function () {
+    //   console.log(this.y);
+    // }
+    // var f1 = new Fn;
+    // var f2 = new Fn;
+    // console.log(f1.getX === f2.getX);//false
+    // console.log(f1.getY === f2.getY);//true
+    // console.log(f1.__proto__.getY === Fn.prototype.getY);//true
+    // console.log(f1.__proto__.getX === f2.getX);//false
+    // console.log(f1.getX === Fn.prototype.getX);//false
+    // console.log(f1.constructor);//Fn
+    // console.log(Fn.prototype.__proto__.constructor);//Object
+    // f1.getX();//100
+    // f1.__proto__.getX();//undefined
+    // f2.getY();//200
+    // Fn.prototype.getY();//undefined
 
 
 
@@ -379,14 +379,17 @@
         如果以上都不可以，就会抛出一个类型错误TypeError， 表示转化input变量到基本类型失败。
      */
     //(a === 1 && a === 2 && a ===3)的值也能是true吗？
-   /*  var value = 0; //window.value
-    Object.defineProperty(window, 'a', {
-      get: function () {
-        return this.value += 1;
-      }
-    });
+    /*  var value = 0; //window.value
+     Object.defineProperty(window, 'a', {
+       get: function () {
+         return this.value += 1;
+       }
+     });
+ 
+     console.log(a === 1 && a === 2 && a === 3) // true */
 
-    console.log(a === 1 && a === 2 && a === 3) // true */
+
+    
   </script>
 </body>
 

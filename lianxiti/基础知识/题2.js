@@ -247,6 +247,19 @@
   * 
   */
 
+  window.val=1;
+  var json = {
+    val:10,
+    dbl:function(){
+      this.val*=2;
+    }
+  }
+  json.dbl();
+  var dbl = json.dbl;
+  dbl();
+  json.dbl.call(window);
+  console.log(window.val+json.val);
+
 
 
 

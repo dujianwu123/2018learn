@@ -16,27 +16,31 @@ export default new Router({
       path: '/home',
       // component: Home,
       component: () => import('../components/Home.vue'),
-      meta: { keepAlive: true }
+      meta: { keepAlive: true,title:'首页' }
     },
     {
       path: '/list',
       // component: List
-      component: () => import('../components/List.vue')
+      component: () => import('../components/List.vue'),
+      meta: { title:'列表页' }
     },
     {
       path: '/add',
       // component: Add
-      component: () => import('../components/Add.vue')
+      component: () => import('../components/Add.vue'),
+      meta: { title:'添加' }
     },
     {
       path: '/detail/:bid',
       // component: Detail,
       component: () => import('../components/Detail.vue'),
-      name: 'detail'
+      name: 'detail',
+      meta: { title:'修改' }
     },
     {
       path: '/collect',
-      component: () => import('../components/Collect.vue')
+      component: () => import('../components/Collect.vue'),
+      meta: { title:'收藏' }
     },
     { path: '*', redirect: '/home' }
   ]

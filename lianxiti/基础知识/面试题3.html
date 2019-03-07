@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="left">5</div>
+  <script>
+    /**
+     * 1
+     **/
+    // window.val = 1;
+    // var json = {
+    //   val: 10,
+    //   dbl: function () {
+    //     this.val *= 2;
+    //   }
+    // }
+    // json.dbl();
+    // var dbl = json.dbl;
+    // dbl();
+    // json.dbl.call(window);
+    // console.log(window.val + json.val);  
+
+    /**
+     * 2
+     **/
+    // (function(){
+    //   var val = 1;
+    //   var json = {
+    //     val:10,
+    //     dbl:function(){
+    //       val*=2;
+    //     }
+    //   }
+    //   json.dbl();
+    //   console.log(json.val+val);
+    // })();
+
+    /**
+     * 3
+     **/
+    // function C1(name){
+    //   if(name){
+    //       this.name = name;
+    //   }
+    // }
+    // function C2(name){
+    //   this.name = name;
+    // }
+    // function C3(name){
+    //   this.name = name || 'join';
+    // }
+
+    // C1.prototype.name = "Tom";
+    // C2.prototype.name = "Tom";
+    // C3.prototype.name = "Tom";
+    // console.log(new C1().name)+(new C2().name)+(new C3().name);
+    // console.log((new C1().name)+(new C2().name)+(new C3().name));
+    
+    /**
+     * 4
+     **/
+    //想让数字5 隔一秒变为3...依次至变为1，请问用JS如何写
+
+    // let oLeft = document.getElementById('left');
+    // let num = parseInt(oLeft.innerText);
+    // let timer = setInterval(() => {
+    //   num--
+    //   oLeft.innerText = num;
+    //   if(num === 1){
+    //       clearInterval(timer);
+    //   }
+    // }, 1000);
+
+    /**
+     * 5
+     **/
+    // var test = (function(i){
+    //   return function(){
+    //     console.log(i*=2);
+    //   }
+    // })(2);
+
+    // test(5);
+
+    /**
+    * 6
+    **/
+    // var a = 100;
+    // function F1(){
+    //   var b = 200;
+    //   function F2(){
+    //     var c = 300;
+    //     console.log(a);
+    //     console.log(b);
+    //     console.log(c);
+    //   }
+    //   F2()
+    // }
+    // F1();
+
+    
+  </script>
+</body>
+
+</html>
