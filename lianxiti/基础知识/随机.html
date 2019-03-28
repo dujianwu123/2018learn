@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
-  <script >
-    var str="sadsadhsjkdhqwuwuqeiwqhh12381923789asdhashn";
-    var sjs='';
+  <script>
+    var str = "sadsadhsjkdhqwuwuqeiwqhh12381923789asdhashn";
+    var sjs = '';
     console.log(sjs.length);
-    while(sjs.length<4){
-      var ran=parseInt(Math.random()*(str.length-0)+0);
-      if(sjs.indexOf(str.charAt(ran))==-1){
-        sjs=sjs+str.charAt(ran);
+    while (sjs.length < 4) {
+      var ran = parseInt(Math.random() * (str.length - 0) + 0);
+      if (sjs.indexOf(str.charAt(ran)) == -1) {
+        sjs = sjs + str.charAt(ran);
       }
     }
     console.log(sjs);
-    
-    function ranDom (n,m){
-      return parseInt(Math.random()*(m-n)+n);
+
+    function ranDom(n, m) {
+      return parseInt(Math.random() * (m - n) + n);
     }
 
-    console.log(ranDom(0,4));
+    console.log(ranDom(0, 4));
   </script>
 </body>
+
 </html>

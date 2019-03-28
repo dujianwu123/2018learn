@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .container .ball {
+      width: 100px;
+      height: 100px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+    }
+
+    .container div:nth-child(1) {
+      top: 20px;
+    }
+
+    .container div:nth-child(2) {
+      top: 140px;
+    }
+
+    .container div:nth-child(3) {
+      top: 260px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="ball">1</div>
+    <div class="ball">2</div>
+    <div class="ball">3</div>
+  </div>
+
+  <script>
+    let [ball1, ball2, ball3] = document.querySelectorAll('.ball');
+    // console.log(ball1,ball2,ball3);
+    /**
+     * 4、async/await写法
+     **/
+    async function a(){
+      await promiseMove(ball1,400);
+      await promiseMove(ball2,400);
+      await promiseMove(ball3,400);
+    }
+    a().then(function(){
+      console.log('end4');
+    });
+    /**
+     * 3、generator+co写法
+     **/
+    // function co(it) {
+    //   return new Promise(function (resolve, reject) {
+    //     function next(d) {
+    //       let { value, done } = it.next(d);
+    //       if (!done) {
+    //         value.then(function (data) {
+    //           next(data);
+    //         }, reject);
+    //       } else {
+    //         resolve(value);
+    //       }
+    //     }
+    //     next();
+    //   });
+    // }
+    // function * m(){
+    //   yield promiseMove(ball1,400);
+    //   yield promiseMove(ball2,400);
+    //   yield promiseMove(ball3,400);
+    // }
+    // co(m()).then(function(){
+    //   console.log('end3');
+    // });
+    /**
+     * 2、promise写法
+     **/
+    function promiseMove(ele, target) {
+      return new Promise(function (resolve, reject) {
+        let left = parseInt(getComputedStyle(ele)['left']);
+        let timer = setInterval(() => {
+          if (left >= target) {
+            clearInterval(timer);
+            resolve();
+          } else {
+            left++;
+            ele.style.left = left + 'px';
+          }
+        }, 3);
+      });
+    }
+    // promiseMove(ball1,400).then(function(){
+    //   return promiseMove(ball2,400);
+    // }).then(function(){
+    //   return promiseMove(ball3,400);
+    // }).then(function(){
+    //   console.log('end2');
+    // });
+    /**
+     * 1、普通写法
+     **/
+    // function move(ele, target, callback) {
+    //   let left = parseInt(getComputedStyle(ele)['left']);
+    //   let timer = setInterval(() => {
+    //     if (left >= target) {
+    //       clearInterval(timer);
+    //       callback();
+    //     }else{
+    //       left ++;
+    //       ele.style.left = left +'px';
+    //     }
+    //   }, 13);
+    // }
+    // move(ball1,400,function(){
+    //   move(ball2,400,function(){
+    //     move(ball3,400,function(){
+    //       console.log('end');
+    //     });
+    //   })
+    // });
+  </script>
+</body>
+
+</html>
