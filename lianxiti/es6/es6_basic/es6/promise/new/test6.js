@@ -3,9 +3,9 @@ const FULFILLED = 'fulfilled';
 const REJECTED = 'rejected';
 let Promise = function (executor) {
   let that = this;
+  that.status = PENDING;
   that.value = undefined;
   that.reason = undefined;
-  that.status = PENDING;
   that.onResolvedCallbacks = [];
   that.onRejectedCallbacks = [];
   function resolve(value) {
@@ -35,15 +35,15 @@ let Promise = function (executor) {
   }
   try {
     executor(resolve, reject);
-  } catch (error) {
-    reject(error);
+  } catch (e) {
+    reject(e);
   }
 }
 function resolvePromise(promise2, x, resolve, reject) {
   if (x === promise2) {
-    return reject(new TypeError('循环利用了!'));
+    return reject(new TypeError('循环调用了!!'));
   }
-  let called = false;
+  let called;
   if (x instanceof Promise) {
     if (x.status === PENDING) {
       x.then(function (y) {
@@ -52,7 +52,7 @@ function resolvePromise(promise2, x, resolve, reject) {
     } else {
       x.then(resolve, reject);
     }
-  } else if (x !== null && (typeof x === 'object' || typeof x === 'function')) {
+  } else if (x !== null && (typeof x === 'function' || typeof x === 'object')) {
     try {
       let then = x.then;
       if (typeof then === 'function') {
@@ -60,10 +60,10 @@ function resolvePromise(promise2, x, resolve, reject) {
           if (called) return;
           called = true;
           resolvePromise(promise2, y, resolve, reject);
-        }, function (error) {
+        }, function (e) {
           if (called) return;
           called = true;
-          reject(error);
+          reject(e);
         });
       } else {
         resolve(x);
@@ -138,42 +138,31 @@ Promise.defer = Promise.deferred = function () {
   });
   return dfd;
 }
-Promise.prototype.catch = function (cb) {
-  return cb.then(null, cb);
+Promise.prototype.catch=function(cb){
+  return cb.then(null,cb);
 }
-Promise.all = function (promises) {
-  return new Promise(function (resolve, reject) {
+Promise.all = function(promises){
+  return new Promise(function(resolve,reject){
     let arr = [];
     let index = 0;
-    function writeDate(i, value) {
+    function writeDate(i,value){
       arr[i] = value;
-      if (++index === promises.length) {
-        resolve(arr);
+      if(++index === promises.length){
+          resolve(arr);
       }
     }
-    for (let i = 0; i < promises.length; i++) {
-      promises[i].then(function (y) {
-        writeDate(i, y);
-      }, reject);
+    for(let i = 0;i<promises.length;i++){
+      promises[i].then(function(x){
+        writeDate(i,x);
+      },reject);
     }
   });
 }
-Promise.race = function (promises) {
-  return new Promise(function (resolve, reject) {
-    for (let index = 0; index < promises.length; index++) {
-      const element = promises[index];
-      element.then(resolve, reject);
+Promise.race=function(promises){
+  return new Promise(function(resolve,reject){
+    for(let i =0 ;i<promises.length;i++){
+      promises[i].then(resolve,reject);
     }
-  });
-}
-Promise.resolve = function (value) {
-  return new Promise(function (resolve, reject) {
-    resolve(value);
-  });
-}
-Promise.reject = function (reason) {
-  return new Promise(function (resolve, reject) {
-    reject(reason);
   });
 }
 module.exports = Promise;
