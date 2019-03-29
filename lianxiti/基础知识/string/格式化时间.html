@@ -12,27 +12,44 @@
 
   <script type="text/javascript">
 
-    function time(date) {
-      var str = ''
-      var arr = date.split(' ');
-      var yearArr = arr[0].split('-');
-      var dateArr = arr[1].split(':');
-      str += yearArr[0] + "年";
-      str += buL(yearArr[1]) + "月";
-      str += buL(yearArr[2]) + "日 ";
+    // function time(date) {
+    //   var str = ''
+    //   var arr = date.split(' ');
+    //   var yearArr = arr[0].split('-');
+    //   var dateArr = arr[1].split(':');
+    //   str += yearArr[0] + "年";
+    //   str += buL(yearArr[1]) + "月";
+    //   str += buL(yearArr[2]) + "日 ";
 
-      str += buL(dateArr[0]) + "时";
-      str += buL(dateArr[1]) + "分";
-      str += buL(dateArr[2]) + "秒";
-      return str;
+    //   str += buL(dateArr[0]) + "时";
+    //   str += buL(dateArr[1]) + "分";
+    //   str += buL(dateArr[2]) + "秒";
+    //   return str;
+    // }
+    // function buL(str) {
+    //   if (str.length < 2) {
+    //     return '0' + str;
+    //   }
+    //   return str;
+    // }
+    // console.log(time('2018-1-7 09:35:36')); // => 01月07日 09时35分
+
+    String.prototype.myFormaTime = function(template='{0}年{1}月{2}日 {3}时{4}分{5}秒'){
+      let arr = this.match(/\d+/g).map((item)=>{
+        console.log(parseInt(item));
+        return parseInt(item) < 10 ? '0'+item : item
+      });
+      return template.replace(/\{(\d)\}/g,function(...arg){
+          console.log(arg);
+          let [,index] = arg;
+          return arr[index]
+      });
     }
-    function buL(str) {
-      if (str.length < 2) {
-        return '0' + str;
-      }
-      return str;
-    }
-    console.log(time('2018-1-7 09:35:36')); // => 01月07日 09时35分
+    let str = '2018-1-7 9:35:36';
+    console.log(str.myFormaTime());
+
+
+    
   </script>
 </body>
 
