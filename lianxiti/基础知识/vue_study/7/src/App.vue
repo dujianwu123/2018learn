@@ -15,7 +15,7 @@
     },
     methods:{
       show(){
-        // this.$notify('哈哈哈',{delay:1000});
+        this.$notify('哈哈哈',{delay:1000});
       }
     }
   };

@@ -1,3 +1,29 @@
+/* eslint-disable */
+/*
+ * 关于AUDIO的一些常用属性
+ *    [属性]
+ *    duration:播放的总时间(S)
+ *    currentTime:当前已经播放的时间(S)
+ *    ended:是否已经播放完成
+ *    paused:当前是否为暂停状态
+ *    volume:控制音量 (0~1)
+ *
+ *    [方法]
+ *    pause() 暂停
+ *    play() 播放
+ *
+ *    [事件 on+]
+ *    canplay：可以正常播放（但是播放过程中可能出现卡顿）
+ *    canplaythrough：资源加载完毕，可以顺畅的播放了
+ *    ended：播放完成
+ *    loadedmetadata：资源的基础信息已经加载完成
+ *    loadeddata：整个资源都加载完成
+ *    pause:触发了暂停
+ *    play:触发了播放
+ *    playing:正在播放中
+ */
+
+// LOADING
 let loadingRender = (function () {
 
   let $loadingBox = $('.loadingBox');
@@ -54,8 +80,7 @@ let loadingRender = (function () {
   }
 })();
 
-// loadingRender.init();
-
+// PHONE
 let phoneRender = (function () {
   let $phoneBox = $('.phoneBox');
   let $time = $phoneBox.find('h2>span');

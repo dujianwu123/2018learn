@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .title{
+      width: 100px;
+      line-height: 35px;
+      text-align: center;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <collapse>
+      <collapse-item title="react">内容1</collapse-item>
+      <collapse-item title="vue">内容2</collapse-item>
+      <collapse-item title="node">内容3</collapse-item>
+    </collvue>
+  </div>
+  <template id="collapse">
+    <div class="warp">
+      <slot></slot>
+    </div>
+  </template>
+  <template id="collapse-item">
+    <div>
+      <div class="title" @click="click_fn">{{title}}</div>
+      <div v-show="show">
+        <slot></slot>
+      </div>
+    </div>
+  </template>
+  <script type="text/javascript" src="../../node_modules/vue/dist/vue.js"></script>
+  <script>
+    //平级通信  $parent 获取父组件的实例  $children 获取所有的儿子
+    let collapse = {
+      template: '#collapse',
+      methods: {
+        cut(child_uid){//只要儿子点击了，就要知道当前点击的是谁
+          this.$children.forEach(element => {
+            if(element._uid !== child_uid){
+              element.show = false;
+            }
+          });
+        }
+      }
+    };
+    let collapseItem = {
+      template: '#collapse-item',
+      props:["title"],
+      data(){
+        return {
+          show:false
+        }
+      },
+      methods:{
+        click_fn(){
+          this.$parent.cut(this._uid);
+          this.show = !this.show;
+        }
+      }
+    };
+    let vm = new Vue({
+      el: "#app",
+      components: {
+        collapse,
+        collapseItem
+      },
+      methods: {
+      }
+    });
+  </script>
+</body>
+
+</html>

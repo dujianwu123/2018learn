@@ -17,10 +17,10 @@
    return b;
  }
 let it = read();
-console.log(it.next('213'));
-console.log(it.next('100'));
-console.log(it.next('200'));
-console.log(it.next('400'));
+console.log(it.next('213'));//1 {value:珠峰,flag:false}
+console.log(it.next('100'));//100 {value:9,flag:false}
+console.log(it.next('200'));//200 {value:200,flag:false}
+console.log(it.next('400')); //{value:undefined,flag:true}
 
 
 //异步  generator 主要和promise搭配使用
