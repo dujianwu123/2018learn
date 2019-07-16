@@ -1,3 +1,4 @@
+/* eslint-disable */
 function observer (obj){
   if(typeof obj === 'object'){
     for(let key in obj){
