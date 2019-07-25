@@ -1,3 +1,4 @@
+/* eslint-disable */
 let Promise = require('./promise.js');
 console.log(Promise);
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <script>
+    // let sendAry = [
+    //   axios.get('https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/list'),
+    //   axios.get('https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/info'),
+    //   axios.post('https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/add')
+    // ]
+    // 三个请求都完成才做一些事情（可以基于ALL实现）
+    // axios.all(sendAry).then((result)=>{
+    //   console.log(result); // 是一个数组，分别存储每一个请求的结果
+    // })
+    // axios.all(sendAry).then(axios.spread((resA,resB,resC)=>{
+    //   console.log(resA,resB,resC);
+    // }))
+
+
+    //-> 初始化一些常用的配置项
+    axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp'
+    // axios.defaults.validateStatus = function validateStatus(status) {
+    //   // 自定义成功失败规则:RESOLVE / REJECT(默认规则:状态码以2开头算作成功)
+    //   return /^(2|3)\d{2}$/.test(status)
+    // }
+    //=>设置在POST请求中基于请求主体向服务器发送内容的格式，默认是RAW，项目中常用的是URL-ENCODEED格式
+    axios.defaults.headers['Content-Type'] = 'appliction/x-www-form-urlencoded';
+    axios.defaults.transformRequest = data => {
+        //=>DATA:就是请求主体中需要传递给服务器的内容（对象）
+        let str = ``;
+        for (let attr in data) {
+            if (data.hasOwnProperty(attr)) {
+                str += `${attr}=${data[attr]}&`;
+            }
+        }
+        return str.substring(0, str.length - 1);
+    };
+    // axios.defaults.timeout = 3000
+    // axios.defaults.headers = {//自定义请求头
+    //   name: 'djw'
+    // }
+    axios.post('/add', {
+        lx: 12,
+        sex: 1
+    }).then(result => {
+        console.log(result);
+    });
+  </script>
+</body>
+</html>

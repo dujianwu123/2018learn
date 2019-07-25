@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * generator 函数要用* 来比表标识，yield（暂停 产出）
  * 他会将函数分割出好多个部分，调用一次next就会继续向下执行

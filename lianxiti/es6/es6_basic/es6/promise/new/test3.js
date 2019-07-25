@@ -1,3 +1,4 @@
+/* eslint-disable */
 let Promise = function (executor) {
   let that = this;
   that.status = 'pending';

@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * bluebird 是世界最快的promise库
  * 它能把任意的通过回调函数实现的异步API换成 promise api

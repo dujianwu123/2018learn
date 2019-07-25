@@ -1,3 +1,4 @@
+/* eslint-disable */
 ~function anonymous(window){
   class Subscribe{
     constructor (){

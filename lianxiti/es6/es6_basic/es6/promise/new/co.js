@@ -1,4 +1,5 @@
- function co (it){
+/* eslint-disable */
+function co (it){
     return new Promise(function(resolve,reject){
         function next (d){
             let {value,done} = it.next(d);

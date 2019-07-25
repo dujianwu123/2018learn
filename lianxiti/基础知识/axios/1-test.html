@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <form action="https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/info" method="post">
+    用户ID: <input type="text" name="name">
+    <input type="submit" id="submit">
+</form> -->
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <script>
+    /**
+     * axios ： 它是一个类库，基于PROMISE管理的AJAX库
+     * 1、提供了对应请求方式的方法(例如：get/post/head/delete/put/options...)
+     *    axios.get() 向服务器发送一个请求，基于的是GET方式
+     * 2、支持的参数配置
+     *    axios.get([URL],[OPTIONS])
+     * 3、基于GET或者POST方法发请求，返回的结果都是PROMISE实例
+     **/
+
+    // axios.get('https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/info', {
+    //   params: {//=》GET请求中，会把PARAMS中的键值对拼接成URLENCODE格式的字符串，然后以问号传递参数的方式，传递给服务器，类似于(JQ中的data)
+    //     name: 'zhufeng',
+    //     age: 9
+    //   }
+    // })
+    
+    // axios.post('https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/add', {
+    //   // 配置项中传递的内容都相当于基于请求主体传递给服务器，但是传递给服务器的内容格式是RAW（JSON格式的字符串），不是x-www-form-urlencoded
+    //   name: 'zhufeng',
+    //   age: 9
+    // });
+
+    /*let promise = axios.get('https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/info2', {
+        params: {
+            lx: 12
+        }
+    });
+    promise.then(result => {
+        // console.log(result);//=>获取的结果是一个对象
+        /!*
+         * data：从服务器获取的响应主体内容
+         * headers：从服务器获取的响应的头信息
+         * request：创建的AJAX实例
+         * status：状态码
+         * statusText：状态码的描述
+         * config：基于AXIOS发送请求的时候做的配置项
+         *!/
+    }).catch(msg => {
+        console.log(msg);//=>请求失败的原因
+    });*/
+
+    axios.get('https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/info', {
+        params: {
+            lx: 12
+        }
+    }).then(result => {
+        let {data} = result;
+        //...
+        console.log(data);
+
+        return axios.post('https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/add');
+    }).then(result => {
+        let {data} = result;
+        console.log(data);
+    });
+  </script>
+</body>
+
+</html>

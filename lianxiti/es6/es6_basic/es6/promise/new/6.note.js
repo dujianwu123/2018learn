@@ -1,3 +1,4 @@
+/* eslint-disable */
 //promise化
 function promiseify (fn){
     return function(...arg){

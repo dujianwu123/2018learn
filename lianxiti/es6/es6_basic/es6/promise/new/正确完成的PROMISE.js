@@ -1,3 +1,4 @@
+/* eslint-disable */
 function Promise(executor) { // executor是一个执行函数
   let self = this;
   self.status = 'pending';

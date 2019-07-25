@@ -1,3 +1,4 @@
+/* eslint-disable */
 let Promise = require('./test5.js');
 
 let p1 = new Promise(function(resolve,reject){

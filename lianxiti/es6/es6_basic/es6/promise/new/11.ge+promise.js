@@ -1,3 +1,4 @@
+/* eslint-disable */
 let fs = require('fs');
 function readFile (filename){
   return new Promise(function(resolve,reject){

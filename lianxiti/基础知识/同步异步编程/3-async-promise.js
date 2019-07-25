@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 console.log(1);
 new Promise((resolve, reject) => {

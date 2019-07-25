@@ -1,3 +1,4 @@
+/* eslint-disable */
 let Promise = function (executor) {
   let self = this;
   self.value = undefined;

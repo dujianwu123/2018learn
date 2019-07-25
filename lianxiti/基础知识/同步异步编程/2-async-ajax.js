@@ -1,3 +1,4 @@
+/* eslint-disable */
 //=>AJAX任务开始：SEND
 //=>AJAX任务结束：状态为4
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 let Promise = require('./test3.js');
 let p = new Promise(function (resolve, reject) {
     setTimeout(() => {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 let bluebird = require('bluebird');
 let fs = require('fs');
 let read = bluebird.promisify(fs.readFile);

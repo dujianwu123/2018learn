@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * async/await 号称异步的终极解决方案，是最简单的，
  * 但是其实它只是generator+promise的语法糖
