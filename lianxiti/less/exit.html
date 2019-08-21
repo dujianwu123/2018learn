@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 100px;
+
+      @media screen and (max-width: 320px) {
+        font-size: 64px;
+      }
+
+      @media screen and (min-width: 540px) {
+        font-size: 108px;
+      }
+    }
+
+    body {
+      max-width: 540px;
+      min-width: 320px;
+    }
+
+    h1 {
+      font-size: 0.4rem;
+      padding-top: 0.2rem;
+      padding-bottom: 0.2rem;
+      text-align: center;
+    }
+
+    p {
+      font-size: 0.22rem;
+      text-indent: 2em;
+      padding: 0 0.1rem;
+      text-align: justify;
+      line-height: 1.4em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>关于吉财猫平台良性退出公告</h1>
+  <p>尊敬的吉财猫用户：</p>
+  <p>您好！深圳市挖财猫金融信息服务有限公司自2014年上线运营至今，在吉财猫投资人的支持与信任下得以持续发展，是大家的支持与信任让吉财猫平台在五年里一步一步稳固向前，平台在此对大家一直的陪伴表示衷心的感谢！</p>
+  <p>由于公司发展严格服从监管政策，经公司领导慎重考虑，向深圳市福田区金融工作局报备，公司决定“退出网络借贷信息中介业务”。</p>
+  <p>截止本通知发出日，平台的所有标的项目均已回款，保障每位投资人的资金安全，目前我们已将每位投资人资金兑付完毕。</p>
+  <p>退出期间具体工作安排与说明如下：</p>
+  <p>1、自公告发布之日起，平台将停止相关业务类运营，保留网站及APP相关维护，不再发行新产品，不再产生新的业务增量；</p>
+  <p>2、平台网站服务安排：平台内（PC端、移动端APP）所有产品停止发标，关闭充值功能；登陆、查询、提现等其他操作功能不受影响。</p>
+  <p>3、自公告发布后的20个工作日后，我公司将按照相关要求，取消网站备案工作，届时将关闭平台网站：www.wacaimao.com；</p>
+  <p>4、平台确保按照良性退出方案，接受出借人和监管部门监督。</p>
+  <p>5、公司承诺在清退期间做到不失联，不擅自关闭平台网站和APP应用，不损坏文件资料，对每件事情负责到底。</p>
+  <p>后续公司如有新动态再另行通知，再次感谢投资人对吉财猫平台工作的信任和支持！</p>
+  <p style="padding-top: 0.2rem;text-align:right;">深圳市挖财猫金融信息服务有限公司</p>
+  <p style="text-align:right;">2019年08月06日</p>
+  <p style="padding-top: 0.4rem;">附：吉财猫平台联系电话：400-169-1681</p>
+  <p>深圳市福田区金融办联系电话：0755-2360 8624</p>
+  <script>
+    !function anonymous(window) {
+      let computedREM = function computedREM() {
+        let winW = document.documentElement.clientWidth;
+        let desW = 640;
+        if (winW >= desW) {
+          document.documentElement.style.fontSize = '100px';
+          return;
+        }
+        document.documentElement.style.fontSize = winW / desW * 100 + 'px';
+      }
+      computedREM();
+      window.addEventListener('resize', computedREM);
+    }(window);
+  </script>
+</body>
+
+</html>
