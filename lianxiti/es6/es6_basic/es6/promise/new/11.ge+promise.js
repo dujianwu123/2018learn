@@ -1,20 +1,20 @@
 /* eslint-disable */
 let fs = require('fs');
-function readFile (filename){
-  return new Promise(function(resolve,reject){
-    fs.readFile(filename,'utf8',function(err,date){
-      err? reject(err) : resolve(date);
+function readFile(filename) {
+  return new Promise(function (resolve, reject) {
+    fs.readFile(filename, 'utf8', function (err, date) {
+      err ? reject(err) : resolve(date);
     });
   });
 }
 
-function * read(){
+function* read() {
   let a = yield readFile('./1.txt');
   // console.log(a);
   let b = yield readFile(a);
   // console.log(b);
   let c = yield readFile(b);
-  console.log("c---"+c);
+  console.log("c---" + c);
   return c;
 }
 
@@ -29,19 +29,21 @@ let it = read();
 //   })
 // })
 
-co(it).then(function(date){
+co(it).then(function (date) {
   console.log(date);
 });
 
-function co(it){
-  return new Promise(function(resolve,reject){
-    function coNext(d){
-      let {value,done} = it.next(d);
-      if(!done){
-        value.then(function(d){
+function co(it) {
+  return new Promise(function (resolve, reject) {
+    function coNext(d) {
+      let { value, done } = it.next(d);
+      if (!done) {
+        Promise.resolve(value).then(function (d) {
           coNext(d);
-        },reject);
-      }else{
+        }, err => {
+          reject(err)
+        });
+      } else {
         resolve(value);
       }
     }

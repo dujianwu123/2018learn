@@ -34,7 +34,21 @@
 // }while(!res.done);
 
 
-
+function * read (){
+  try {
+    let a = yield 1;
+    console.log(a);
+    let b = yield 2;
+    console.log(b);
+    let c = yield 3;
+    console.log(c);
+  } catch (error) {
+    console.log('e:'+error);
+  }
+}
+let it = read();
+console.log(it.next('xxx'));
+it.throw('xxx');
 
 
 
