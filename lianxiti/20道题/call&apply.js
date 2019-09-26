@@ -110,30 +110,30 @@
 
 
 
-Function.prototype.call = function () {
-  let [thisArg, ...arg] = [...arguments];
-  if (!thisArg) {
-    thisArg = typeof window === 'undefined' ? global : window;
-  }
-  thisArg.func = this;
-  let result = thisArg.func();
-  delete thisArg.func;
-  return result;
-}
-Function.prototype.apply = function (thisArg, rest) {
-  if (!thisArg) {
-    thisArg = typeof window === 'undefined' ? global : window;
-  }
-  let result ;
-  thisArg.func = this;
-  if (rest) {
-    result = thisArg.func(...rest);
-  }else {
-    result = thisArg.func();
-  }
-  delete thisArg.func;
-  return result;
-}
+// Function.prototype.call = function () {
+//   let [thisArg, ...arg] = [...arguments];
+//   if (!thisArg) {
+//     thisArg = typeof window === 'undefined' ? global : window;
+//   }
+//   thisArg.func = this;
+//   let result = thisArg.func();
+//   delete thisArg.func;
+//   return result;
+// }
+// Function.prototype.apply = function (thisArg, rest) {
+//   if (!thisArg) {
+//     thisArg = typeof window === 'undefined' ? global : window;
+//   }
+//   let result ;
+//   thisArg.func = this;
+//   if (rest) {
+//     result = thisArg.func(...rest);
+//   }else {
+//     result = thisArg.func();
+//   }
+//   delete thisArg.func;
+//   return result;
+// }
 
 
 // let a = {
@@ -152,26 +152,76 @@ Function.prototype.apply = function (thisArg, rest) {
 // })
 // console.log(a == 1 && a == 2 && a == 3);
 
+// Function.prototype.call = function () {
+//   let [thisArg, ...arg] = [...arguments];
+//   if(!thisArg){
+//     thisArg = typeof window === 'undefined' ? global : window;
+//   }
+//   thisArg.func = this;
+//   let result = thisArg.func(arg);
+//   delete thisArg.func;
+//   return result
+// }
+
+// Function.prototype.apply = function (thisArg, rest) {
+//   if(!thisArg){
+//     thisArg = typeof window === 'undefined' ? global : window;
+//   }
+//   thisArg.func = this;
+//   let result;
+//   if (rest) {
+//     result = thisArg.func(...rest)
+//   }else {
+//     result = thisArg.func()
+//   }
+//   delete thisArg.func;
+//   return result;
+// }
+
+// Function.prototype.call = function () {
+//   let [thisArg, ...arg] = [...arguments];
+//   if (!thisArg) {
+//     thisArg = typeof window === 'undefined' ? global : window;
+//   }
+//   thisArg.func = this;
+//   let result = thisArg.func(...arg);
+//   delete thisArg.func;
+// }
+
 Function.prototype.call = function () {
   let [thisArg, ...arg] = [...arguments];
-  if(!thisArg){
+  if (!thisArg) {
     thisArg = typeof window === 'undefined' ? global : window;
   }
   thisArg.func = this;
-  let result = thisArg.func(arg);
+  let result = thisArg.func(...arg);
   delete thisArg.func;
   return result
 }
+// Function.prototype.apply = function (thisArg, rest) {
+//   if (!thisArg) {
+//     thisArg = typeof window === 'undefined' ? global : window;
+//   }
+//   thisArg.func = this;
+//   let result ;
+//   if (rest) {
+//     result = thisArg.func(...rest);
+//   }else {
+//     result = thisArg.func();
+//   }
+//   delete thisArg.func;
+//   return result;
+// }
 
-Function.prototype.apply = function (thisArg, rest) {
-  if(!thisArg){
+Function.prototype.apply = function (thisArg,rest) {
+  if (!thisArg) {
     thisArg = typeof window === 'undefined' ? global : window;
   }
-  thisArg.func = this;
+  this.Arg.func = this;
   let result;
   if (rest) {
     result = thisArg.func(...rest)
-  }else {
+  }else{
     result = thisArg.func()
   }
   delete thisArg.func;

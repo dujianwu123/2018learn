@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+      background: whitesmoke;
+      border-left: 5px solid #ddd;
+      border-right: 5px solid #ddd;
+      border-bottom: 5px solid #aaa;
+      border-radius: 5px;
+      box-sizing: border-box;
+      margin: 10px;
+      display: flex;
+    }
+
+    .item {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #000;
+      box-shadow: 0 -2px 0 #333 inset;
+    }
+
+    .one {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .two {
+      justify-content: space-between;
+    }
+
+    .two div:nth-child(2) {
+      align-self: flex-end;
+    }
+
+    .three {
+      justify-content: space-between;
+    }
+
+    .three div:nth-child(2) {
+      align-self: center;
+    }
+
+    .three div:nth-child(3) {
+      align-self: flex-end;
+    }
+
+    .four {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .four .row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .five {
+      flex-wrap: wrap;
+    }
+
+    .five .row {
+      display: flex;
+      flex-basis: 100%;
+      justify-content: space-between;
+    }
+
+    .five .row:nth-child(2) {
+      justify-content: center;
+    }
+    .six {
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content:space-between;
+      align-content: space-between;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container one">
+    <div class="item"></div>
+  </div>
+  <div class="container two">
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <div class="container three">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <div class="container four">
+    <div class="row">
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+    <div class="row">
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+  </div>
+  <div class="container five">
+    <div class="row">
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+    <div class="row">
+      <div class="item"></div>
+    </div>
+    <div class="row">
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+  </div>
+  <div class="container six">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+</body>
+
+</html>

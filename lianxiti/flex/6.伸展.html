@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>两边固定，中间自适应</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    .container{
+      width: 900px;
+      height: 500px;
+      background: pink;
+      margin: 0 auto;
+      display: flex;
+    }
+    .item{
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+    .container div:nth-child(2){
+      flex-grow: 1;
+      background: #344334;
+    }
+    .container div:nth-child(3){
+      flex-grow: 1;
+      background: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">4</div>
+    <div class="item">3</div>
+  </div>
+</body>
+</html>

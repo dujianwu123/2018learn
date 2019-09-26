@@ -13,8 +13,20 @@ function SubType (name,age) {
   SuperType.call(this,name);
   this.age = age;
 }
+// function object (o) {
+//   function f (){}
+//   f.prototype = o;
+//   return new f();
+// }
+// function inheritPrototype (superType, subType) {
+//   let prototype = object(superType.prototype);
+//   prototype.constructor = subType;
+//   subType.prototype = prototype;
+// }
+// inheritPrototype(SuperType, SubType);
+
 function object (o) {
-  function f (){}
+  function f () {}
   f.prototype = o;
   return new f();
 }
@@ -23,7 +35,7 @@ function inheritPrototype (superType, subType) {
   prototype.constructor = subType;
   subType.prototype = prototype;
 }
-inheritPrototype(SuperType, SubType);
+inheritPrototype (SuperType, SubType)
 SubType.prototype.ddd = function(){};
 let son = new SubType('djw', 18);
 son.arg.push(4);
