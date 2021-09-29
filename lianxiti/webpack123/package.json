@@ -16,7 +16,7 @@
     "@babel/preset-env": "^7.2.3",
     "awesome-typescript-loader": "^5.2.1",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "npm": "^6.5.0",
     "ts-loader": "^5.3.2",
     "typescript": "^3.2.2",
